@@ -1,5 +1,5 @@
 <!-- archive.html -->
-<form action="/blog/create/" method=post>
+<form action="/blog/create/" method=post>{% csrf_token %}
     <table>{{ form }}</table><br>
     <input type=submit>
 </form>
