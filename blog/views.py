@@ -5,9 +5,11 @@ from django.shortcuts import render
 from blog.models import BlogPost, BlogPostForm
 from datetime import datetime
 from django.http import HttpResponseRedirect
+from django.views.decorators.csrf import csrf_protect
 
 # Create your views here.
 
+@csrf_protect
 def archive(request):
     posts = BlogPost.objects.all()[:10]
     return render(request, 'archive.html', {'posts':posts, 'form':BlogPostForm()})
