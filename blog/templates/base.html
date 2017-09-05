@@ -1,5 +1,52 @@
 <!-- base.html -->
-Generic Welcome to your web page [Login - Help - FAQ]
+<!--Generic Welcome to your web page [Login - Help - FAQ]-->
+<div class="navbar navbar-fixed-top" id="navbar">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="brand" href="http://readfree.me/"></a>
+            <ul class="nav">
+                <li class="nav-item "><a href="http://readfree.me/gutenberg/">古腾堡</a></li>
+            </ul>
+
+            <ul class="nav pull-right">
+
+
+                <li class="nav-item"><a href="http://readfree.me/accounts/settings/pro/"><i class="fa fa-rocket"></i><span class="visible-large">升级</span></a></li>
+
+
+                <li class="nav-item "><a href="http://readfree.me/upload/"><i class="fa fa-upload" aria-hidden="true"></i><span class="visible-large">上传</span></a></li>
+
+                <li class="nav-item ">
+                    <a href="http://readfree.me/notifications/">
+                        <i class="fa fa-bell" aria-hidden="true"></i>
+                        <span class="visible-large">通知</span>
+
+                    </a>
+                </li>
+                <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-original-title="">
+                            <span class="ribbon-wrapper">
+                                <span class="ribbon-wrapper-green"><div class="ribbon-green hidden">Pro</div></span>
+                                <img class="img img-circle avatar-small"  title="elevenl" src="htt://readfree.me/static/img/babel.png"/>
+                            </span>
+                            <b class="caret"></b>
+                        </a>
+                        <ul id='account-dropdown' class="dropdown-menu">
+
+                            <li><a href="/accounts/profile/elevenl/wish/"><i class="icon-user" aria-hidden="true"></i>个人中心</a></li>
+                            <li><a href="/accounts/settings/push/"><i class="icon-cog"></i> 设置</a></li>
+                            <li><a href="/faq/"><i class="icon-question-sign"></i> 常见问题</a></li>
+                            <li><a href="#wechat-qrcode" role="button" data-toggle="modal"><i class="icon-qrcode"></i>微信公众号</a></li>
+                            <li><a href="http://forum.readfree.me/" target="_blank"><i class="fa fa-comments-o"></i>论坛</a></li>
+                            <li><a href="/accounts/logout/?next=/"><i class="icon-off"></i> 退出</a></li>
+                        </ul>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</div>
+
 <h1>Blog Central</h1>
 {% block content %}
 {% endblock %}
