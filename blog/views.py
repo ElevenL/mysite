@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from django.shortcuts import render
 from blog.models import BlogPost, BlogPostForm
 from datetime import datetime
+from django.utils import timezone
 from django.http import HttpResponseRedirect
 from django.views.decorators.csrf import csrf_protect
 
@@ -19,6 +20,6 @@ def create_blogpost(request):
         form = BlogPostForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
-            post.timestamp = datetime.now()
+            post.timestamp = timezone.now()
             post.save()
     return HttpResponseRedirect('/blog/')
