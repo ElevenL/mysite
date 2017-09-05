@@ -12,7 +12,7 @@ from django.template import RequestContext
 def archive(request):
     posts = BlogPost.objects.all()
     return render_to_response('archive.html', {'posts':posts, 'form':BlogPostForm()},
-                              RequestContext(request))
+                              context_instance=RequestContext(request))
 
 def create_blogpost(request):
     if request.method == 'POST':
