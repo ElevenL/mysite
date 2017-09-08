@@ -11,7 +11,8 @@ from django.views.decorators.csrf import csrf_protect
 # @csrf_protect
 def index(request):
     books = BookInfo.objects.all()[:2]
-    return render(request, 'index.html', {'books':books})
+    page = 20
+    return render(request, 'index.html', {'books':books, 'cpage':page})
 
 def get_page(request):
     page_pernum = 2
