@@ -22,4 +22,5 @@ urlpatterns = [
     url(r'^$', RedirectView.as_view(url='/blog/')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^blog/', include('blog.urls')),
+    url(r'^reading/', include('reading.urls')),
 ]
