@@ -14,8 +14,12 @@ def index(request):
     return render(request, 'index.html', {'books':books})
 
 def get_page(request):
+    page_pernum = 2
     page = int(request.GET.get('page', '2'))
-    start_id = (page - 1) * 2
-    end_id = start_id + 2
+    allBookCounts = BookInfo.objects.count()
+    max_page = allBookCounts / page_pernum
+    start_id = (page - 1) * page_pernum
+    end_id = start_id + page_pernum
+    page = 100
     books = BookInfo.objects.all()[start_id:end_id]
-    return render(request, 'index.html', {'books': books})
+    return render(request, 'index.html', {'books': books, 'cpage':page})
