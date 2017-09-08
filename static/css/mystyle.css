@@ -2,25 +2,25 @@
     padding: 50px 100px 10px;
 }
 
-div.row {
+body div.book-li {
     padding-top:25px;
     padding-bottom:50px;
     padding-right:100px;
     padding-left:100px;
 }
 
-div a img.book-img {
+.book-cover .img-responsive {
     height:150px;
 }
 
-.book-name {
+.book-card p.book-name {
     width: 200px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
-.book-author {
+.book-card p.book-name {
     width: 200px;
     overflow: hidden;
     text-overflow: ellipsis;
