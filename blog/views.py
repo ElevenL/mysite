@@ -13,7 +13,7 @@ from django.views.decorators.csrf import csrf_protect
 @csrf_protect
 def archive(request):
     posts = BlogPost.objects.all()[:10]
-    return render(request, 'testbootstrap.html', {'posts':posts, 'form':BlogPostForm()})
+    return render(request, 'index.html', {'posts':posts, 'form':BlogPostForm()})
 
 def create_blogpost(request):
     if request.method == 'POST':
