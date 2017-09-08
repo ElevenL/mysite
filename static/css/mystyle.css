@@ -1,0 +1,28 @@
+.search-bar {
+    padding: 50px 100px 10px;
+}
+
+div.row {
+    padding-top:25px;
+    padding-bottom:50px;
+    padding-right:100px;
+    padding-left:100px;
+}
+
+div a img.book-img {
+    height:150px;
+}
+
+.book-name {
+    width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.book-author {
+    width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
