@@ -1,11 +1,6 @@
 <!-- index.html -->
 {% extends "base.html" %}
 {% block content %}
-    <form action="/blog/create/" method=post>{% csrf_token %}
-        <table>{{ form }}</table><br>
-        <input type=submit>
-    </form>
-    <hr>
     {% for book in books %}
         <div class="col-sm-6 col-md-2">
             <div class="well book-card">
