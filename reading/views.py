@@ -3,9 +3,7 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render
 from reading.models import BookInfo
-from datetime import datetime
-from django.utils import timezone
-from django.http import HttpResponseRedirect
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.decorators.csrf import csrf_protect
 
 # Create your views here.
@@ -16,10 +14,13 @@ def index(request):
     return render(request, 'index.html', {'books':books})
 
 def get_page(request):
+    cus_list = BookInfo.objects.all()
+    paginator = Paginator(cus_list, 2, 2)
     page = int(request.GET.get('page'))
-    print page
-    print type(page)
-    start_id = (page - 1) * 2
-    end_id = start_id + 2
-    books = BookInfo.objects.all()[start_id:end_id]
+    try:
+        books = paginator.page(page)
+    except PageNotAnInteger:
+        books = paginator.page(1)
+    except EmptyPage:
+        books = paginator.page(paginator.num_pages)
     return render(request, 'index.html', {'books': books})
