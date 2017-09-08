@@ -14,13 +14,8 @@ def index(request):
     return render(request, 'index.html', {'books':books})
 
 def get_page(request):
-    cus_list = BookInfo.objects.all()
-    paginator = Paginator(cus_list, 2, 2)
-    page = int(request.GET.get('page'))
-    try:
-        books = paginator.page(page)
-    except PageNotAnInteger:
-        books = paginator.page(1)
-    except EmptyPage:
-        books = paginator.page(paginator.num_pages)
+    page = int(request.GET.get('page', 1))
+    start_id = (page - 1) * 2
+    end_id = start_id + 2
+    books = BookInfo.objects.all()[start_id:end_id]
     return render(request, 'index.html', {'books': books})
