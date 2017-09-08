@@ -12,5 +12,12 @@ from django.views.decorators.csrf import csrf_protect
 
 @csrf_protect
 def index(request):
-    books = BookInfo.objects.all()
+    books = BookInfo.objects.all()[:2]
     return render(request, 'index.html', {'books':books})
+
+def get_page(request):
+    page = request.GET.get('page')
+    start_id = (page - 1) * 2 + 1
+    end_id = start_id + 2
+    books = BookInfo.objects.filter(id__range=(start_id,end_id))
+    return render(request, 'index.html', {'books': books})

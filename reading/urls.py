@@ -3,4 +3,5 @@ from reading.views import *
 
 urlpatterns = [
     url(r'^$', index),
+    url(r'^page=', get_page)
 ]
