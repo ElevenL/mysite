@@ -16,7 +16,7 @@ def index(request):
     return render(request, 'index.html', {'books':books})
 
 def get_page(request):
-    page = request.GET.get('page')
+    page = int(request.GET.get('page'))
     print page
     print type(page)
     start_id = (page - 1) * 2 + 1
