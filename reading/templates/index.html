@@ -6,10 +6,25 @@
         <input type=submit>
     </form>
     <hr>
-    {% for post in posts %}
-        <h2>{{ post.title }}</h2>
-        <p>{{ post.timestamp }}</p>
-        <p>{{ post.body }}</p>
-        <hr>
+    {% for book in books %}
+        <div class="col-sm-6 col-md-2">
+            <div class="well book-card">
+                <div class="book-cover clearfix">
+                    <a>
+                        <img class="img-rounded img-responsive" src="{{ book.imgurl }}">
+                    </a>
+                </div>
+                <div class="caption">
+                    <p class="book-name" title="{{ book.name }}">{{ book.name }}</p>
+                    <p class="book-author">{{ book.author }}</p>
+                    <p>
+                        <a class='book-down btn btn-mini btn-success' href="{{ book.path }}">
+                            <i class="fa fa-download" aria-hidden="true"></i>下载
+                        </a>
+                        <span class="badge pull-right", title="评分">{{ book.score }}</span>
+                    </p>
+                </div>
+            </div>
+        </div>
     {% endfor %}
 {% endblock %}

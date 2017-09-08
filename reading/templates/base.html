@@ -1,8 +1,60 @@
-<!-- base.html -->
-Generic Welcome to your web page [Login - Help - FAQ]
-<h1>Blog Central</h1>
-{% block content %}
-{% endblock %}
-&copy; 2017 your company [About - Contact]
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Reading</title>
+   <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+   <link href="bootstrap/css/mystyle.css" rel="stylesheet">
+   <script src="scripts/jquery.min.js"></script>
+   <script src="bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+<!--导航栏-->
+<nav class="navbar navbar-inverse" role="navigation">
+   <div class="navbar-header">
+      <a class="navbar-brand">阅钉Reading</a>
+   </div>
+   <div>
+      <ul class="nav navbar-nav">
+         <li class="active"><a href="#">书库</a></li>
+         <li><a href="/upload">上传</a></li>
+         <li><a href="/user">个人中心</a></li>
+      </ul>
+   </div>
+</nav>
+
+<div class="search-bar">
+   <form class="bs-example bs-example-form" role="form" action="/search/" method="get">
+      <div class="row">
+         <div class="col-lg-6">
+            <div class="input-group">
+               <input  name="q" value="" placeholder="书名/作者" type="text"  class="form-control">
+               <span class="input-group-btn">
+                  <button class="btn btn-default" type="button">搜索</button>
+               </span>
+            </div>
+         </div>
+      </div>
+   </form>
+</div>
+
+<div class="row book-li">
+    {% block content %}
+    {% endblock %}
+</div>
+
+<nav style="text-align: center">
+<ul class="pagination">
+   <li><a href="#">&laquo;</a></li>
+   <li class="active"><a href="#">1</a></li>
+   <li class="disabled"><a href="#">2</a></li>
+   <li><a href="#">3</a></li>
+   <li><a href="#">4</a></li>
+   <li><a href="#">5</a></li>
+   <li><a href="#">&raquo;</a></li>
+</ul>
+</nav>
+
 </body>
 </html>
