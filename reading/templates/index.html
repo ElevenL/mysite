@@ -1,6 +1,7 @@
 <!-- index.html -->
 {% extends "base.html" %}
 {% block content %}
+    <div class="row book-li">
     {% for book in books %}
         <div class="col-sm-6 col-md-2">
             <div class="well book-card">
@@ -22,4 +23,17 @@
             </div>
         </div>
     {% endfor %}
+    </div>
+
+<nav style="text-align: center">
+<ul class="pagination">
+   <li><a href="#">&laquo;</a></li>
+   <li class="active"><a href="#">1</a></li>
+   <li class="disabled"><a href="#">2</a></li>
+   <li><a href="#">3</a></li>
+   <li><a href="#">4</a></li>
+   <li><a href="#">5</a></li>
+   <li><a href="#">&raquo;</a></li>
+</ul>
+</nav>
 {% endblock %}
