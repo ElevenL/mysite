@@ -8,7 +8,7 @@ from django.views.decorators.csrf import csrf_protect
 
 # Create your views here.
 
-@csrf_protect
+# @csrf_protect
 def index(request):
     books = BookInfo.objects.all()[:2]
     return render(request, 'index.html', {'books':books})
