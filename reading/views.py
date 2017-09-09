@@ -10,17 +10,20 @@ from django.views.decorators.csrf import csrf_protect
 
 # @csrf_protect
 def index(request):
-    books = BookInfo.objects.all()[:2]
-    page = 20
-    return render(request, 'index.html', {'books':books, 'cpage':page})
+    page_pernum = 2
+    page = 1
+    allBookCounts = BookInfo.objects.count()
+    max_page = int(allBookCounts / page_pernum)
+    books = BookInfo.objects.all()[0:page_pernum]
+    return render(request, 'index.html', {'books': books, 'cur_page': page, 'max_page': max_page})
 
 def get_page(request):
     page_pernum = 2
     page = int(request.GET.get('p', '1'))
     allBookCounts = BookInfo.objects.count()
-    max_page = allBookCounts / page_pernum
+    max_page = int(allBookCounts / page_pernum)
     start_id = (page - 1) * page_pernum
     end_id = start_id + page_pernum
     page = 100
     books = BookInfo.objects.all()[start_id:end_id]
-    return render(request, 'index.html', {'books': books, 'cpage':page})
+    return render(request, 'index.html', {'books': books, 'cur_page':page, 'max_page':max_page})
