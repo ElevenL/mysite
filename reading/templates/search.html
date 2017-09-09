@@ -28,7 +28,9 @@
 <!--分页已完成-->
 <nav style="text-align: center">
 <ul class="pagination">
-    <li><a href="?page={{ p_page }}&?q={{ name_kw }}">&laquo;</a></li>
+    {% if p_page != '' %}
+        <li><a href="?page={{ p_page }}&?q={{ name_kw }}">&laquo;</a></li>
+    {% endif %}
     {% for p in page_list %}
         {% if p == cur_page %}
             <li class="active"><a href="?page={{ p }}&?q={{ name_kw }}">{{ p }}</a></li>
@@ -36,7 +38,9 @@
             <li><a href="?page={{ p }}&?q={{ name_kw }}">{{ p }}</a></li>
         {% endif %}
     {% endfor %}
-   <li><a href="?page={{ n_page }}&?q={{ name_kw }}">&raquo;</a></li>
+    {% if n_page != '' %}
+        <li><a href="?page={{ n_page }}&?q={{ name_kw }}">&raquo;</a></li>
+    {% endif %}
 </ul>
 </nav>
 {% endblock %}
