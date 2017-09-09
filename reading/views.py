@@ -19,8 +19,10 @@ def make_pages(cpage, allcount):
     page = cpage
     if allcount == 0:
         max_page = 0
-    else:
+    elif (allcount % page_pernum) != 0:
         max_page = int(allcount / page_pernum) + 1
+    else:
+        max_page = int(allcount / page_pernum)
     if page > max_page:
         page = max_page
     elif page < 1:
