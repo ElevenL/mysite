@@ -16,12 +16,12 @@ Including another URLconf
 from django.conf.urls import *
 from django.contrib import admin
 from django.views.generic import RedirectView
+from reading import views
 admin.autodiscover()
 
 urlpatterns = [
-    url(r'^$', RedirectView.as_view(url='/reading/')),
+    url(r'^$', views.index),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^blog/', include('blog.urls')),
-    url(r'^reading/', include('reading.urls')),
-    url(r'^look/', include('reading.urls')),
+    # url(r'^blog/', include('blog.urls')),
+    url(r'^\?page', views.get_page),
 ]
