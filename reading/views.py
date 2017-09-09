@@ -43,7 +43,7 @@ def index(request):
         n_page = page_list[-1] + 1
     return render(request, 'index.html',
                   {'books': books,
-                   'cur_page': str(page),
+                   'cur_page': page,
                    'page_list': page_list,
                    'p_page': str(p_page),
                    'n_page': str(n_page)})
