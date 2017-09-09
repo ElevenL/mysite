@@ -61,7 +61,7 @@ def index(request):
                    'n_page': str(n_page)})
 
 def search(request):
-    name_kw = urllib.unquote(request.GET.get('q', 'all'))
+    name_kw = request.GET.get('q', 'all')
     page = int(request.GET.get('page', '1'))
     if name_kw == 'all':
         return index(request)
@@ -76,4 +76,4 @@ def search(request):
                    'page_list': page_list,
                    'p_page': str(p_page),
                    'n_page': str(n_page),
-                    'name_kw': name_kw})
+                    'name_kw': urllib.unquote(name_kw)})
