@@ -13,6 +13,8 @@ def index(request):
     page_pernum = 2
     allBookCounts = BookInfo.objects.count()
     max_page = int(allBookCounts / page_pernum)
+    if max_page < 5:
+        max_page = 5
     page = int(request.GET.get('page', '1'))
     if page > max_page:
         page = max_page
