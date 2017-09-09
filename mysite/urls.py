@@ -20,8 +20,8 @@ from reading import views
 admin.autodiscover()
 
 urlpatterns = [
-    url(r'^$', views.index),
+    url(r'^$', views.get_page),
     url(r'^admin/', include(admin.site.urls)),
     # url(r'^blog/', include('blog.urls')),
-    url(r'^page/', views.get_page),
+    # url(r'^page/', views.get_page),
 ]
