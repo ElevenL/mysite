@@ -70,7 +70,7 @@ def search(request):
     allBookCounts = len(search_content)
     start_id, end_id, page_list, p_page, n_page = make_pages(page, allBookCounts)
     books = search_content[start_id:end_id]
-    return render(request, 'index.html',
+    return render(request, 'search.html',
                   {'books': books,
                    'cur_page': page,
                    'page_list': page_list,
