@@ -40,6 +40,8 @@ def make_pages(cpage, allcount):
     if len(page_list) == 0:
         p_page = ''
         n_page = ''
+        start_id = 0
+        end_id = 0
     else:
         if page_list[0] == 1:
             p_page = 1
