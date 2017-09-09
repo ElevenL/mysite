@@ -37,14 +37,18 @@ def make_pages(cpage, allcount):
         page_list = range(last_page - 4, last_page + 1)
     else:
         page_list = range(1, last_page + 1)
-    if page_list[0] == 1:
-        p_page = 1
+    if len(page_list) == 0:
+        p_page = ''
+        n_page = ''
     else:
-        p_page = page_list[0] - 1
-    if page_list[-1] == max_page:
-        n_page = max_page
-    else:
-        n_page = page_list[-1] + 1
+        if page_list[0] == 1:
+            p_page = 1
+        else:
+            p_page = page_list[0] - 1
+        if page_list[-1] == max_page:
+            n_page = max_page
+        else:
+            n_page = page_list[-1] + 1
     return start_id,end_id,page_list,p_page,n_page
 
 # @csrf_protect
