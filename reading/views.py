@@ -19,7 +19,7 @@ def index(request):
 
 def get_page(request):
     page_pernum = 2
-    page = int(request.GET.get('p', '1'))
+    page = int(request.GET.get('page', '1'))
     allBookCounts = BookInfo.objects.count()
     max_page = int(allBookCounts / page_pernum)
     start_id = (page - 1) * page_pernum
