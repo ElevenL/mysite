@@ -1,0 +1,42 @@
+<!-- index.html -->
+{% extends "base.html" %}
+{% block content %}
+    <div class="row book-li">
+    {% for book in books %}
+        <div class="col-sm-6 col-md-2">
+            <div class="well book-card">
+                <div class="book-cover clearfix">
+                    <a>
+                        <img class="img-rounded img-responsive" src="{{ book.imgurl }}">
+                    </a>
+                </div>
+                <div class="caption">
+                    <h4 class="book-name" title="{{ book.name }}">{{ book.name }}</h4>
+                    <p class="book-author">{{ book.author }}</p>
+                    <p>
+                        <a class='book-down btn btn-mini btn-success' href="{{ book.path }}">
+                            <i class="fa fa-download" aria-hidden="true"></i>下载
+                        </a>
+                        <span class="badge pull-right", title="评分">{{ book.score }}</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+
+<!--分页已完成-->
+<nav style="text-align: center">
+<ul class="pagination">
+    <li><a href="?q={{ name_kw }}&?page={{ p_page }}">&laquo;</a></li>
+    {% for p in page_list %}
+        {% if p == cur_page %}
+            <li class="active"><a href="?q={{ name_kw }}&?page={{ p }}">{{ p }}</a></li>
+        {% else %}
+            <li><a href="?q={{ name_kw }}&?page={{ p }}">{{ p }}</a></li>
+        {% endif %}
+    {% endfor %}
+   <li><a href="?q={{ name_kw }}&?page={{ n_page }}">&raquo;</a></li>
+</ul>
+</nav>
+{% endblock %}
