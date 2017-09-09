@@ -7,28 +7,25 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.decorators.csrf import csrf_protect
 
 # Create your views here.
-def make_pages():
-    pass
+def make_pages(cpage, allcount):
+    '''
 
-
-# @csrf_protect
-def index(request):
+    :param cpage: 当前页数
+    :param allcount: 数据总数
+    :return:
+    '''
     page_pernum = 2
-    allBookCounts = BookInfo.objects.count()
-    max_page = int(allBookCounts / page_pernum)
-    # if max_page < 5:
-    #     max_page = 5
-    page = int(request.GET.get('page', '1'))
+    page = cpage
+    max_page = int(allcount / page_pernum)
     if page > max_page:
         page = max_page
     elif page < 1:
         page = 1
     start_id = (page - 1) * page_pernum
     end_id = start_id + page_pernum
-    books = BookInfo.objects.all()[start_id:end_id]
     last_page = 5
     if page <= 3:
-        last_page =5
+        last_page = 5
     elif page >= (max_page - 2):
         last_page = max_page
     else:
@@ -47,6 +44,14 @@ def index(request):
         n_page = max_page
     else:
         n_page = page_list[-1] + 1
+    return start_id,end_id,page_list,p_page,n_page
+
+# @csrf_protect
+def index(request):
+    page = int(request.GET.get('page', '1'))
+    allBookCounts = BookInfo.objects.count()
+    start_id, end_id, page_list, p_page, n_page = make_pages(page, allBookCounts)
+    books = BookInfo.objects.all()[start_id:end_id]
     return render(request, 'index.html',
                   {'books': books,
                    'cur_page': page,
