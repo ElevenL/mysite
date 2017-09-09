@@ -72,8 +72,8 @@ def index(request):
                    'n_page': str(n_page)})
 
 def search(request):
-    name_kw = request.GET.get('q', 'all')
     page = int(request.GET.get('page', '1'))
+    name_kw = request.GET.get('q', 'all')
     if name_kw == 'all':
         return index(request)
     else:
