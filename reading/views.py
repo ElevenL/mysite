@@ -108,6 +108,6 @@ def download(request):
     # file_path = '/root/book/download/Algorithms_4th_Edition.pdf'
     response = StreamingHttpResponse(file_iterator(file_path))
     response['Content-Type'] = 'application/octet-stream'
-    response['Content-Disposition'] = 'attachment;filename="{0}"'.format(file_name)
+    response['Content-Disposition'] = 'attachment;filename="{0}"'.format(file_name.decode('utf-8'))
 
     return response
