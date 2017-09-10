@@ -92,7 +92,8 @@ def search(request):
 
 def download(request):
     # do something...
-
+    file_name = str(request.get_full_path()).split('/')[-1]
+    file_path = '/root/book/download/' + file_name
     def file_iterator(file_name, chunk_size=512):
         with open(file_name) as f:
             while True:
@@ -102,10 +103,10 @@ def download(request):
                 else:
                     break
 
-    the_file_name = "Algorithms_4th_Edition.pdf"
-    file_path = '/root/book/download/Algorithms_4th_Edition.pdf'
+    # the_file_name = "Algorithms_4th_Edition.pdf"
+    # file_path = '/root/book/download/Algorithms_4th_Edition.pdf'
     response = StreamingHttpResponse(file_iterator(file_path))
     response['Content-Type'] = 'application/octet-stream'
-    response['Content-Disposition'] = 'attachment;filename="{0}"'.format(the_file_name)
+    response['Content-Disposition'] = 'attachment;filename="{0}"'.format(file_name)
 
     return response
