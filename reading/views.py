@@ -11,7 +11,7 @@ import urllib
 # Create your views here.
 def make_pages(cpage, allcount):
     '''
-
+    处理分页
     :param cpage: 当前页数
     :param allcount: 数据总数
     :return:
@@ -61,6 +61,11 @@ def make_pages(cpage, allcount):
 
 # @csrf_protect
 def index(request):
+    '''
+    浏览书库
+    :param request:
+    :return:
+    '''
     page = int(request.GET.get('page', '1'))
     allBookCounts = BookInfo.objects.count()
     start_id, end_id, page_list, p_page, n_page = make_pages(page, allBookCounts)
@@ -73,6 +78,11 @@ def index(request):
                    'n_page': str(n_page)})
 
 def search(request):
+    '''
+    书库搜索
+    :param request:
+    :return:
+    '''
     page = int(request.GET.get('page', '1'))
     name_kw = request.GET.get('q', 'all')
     if name_kw == 'all':
@@ -91,6 +101,11 @@ def search(request):
                     'name_kw': urllib.unquote(name_kw)})
 
 def download(request):
+    '''
+    下载图书
+    :param request:
+    :return:
+    '''
     # do something...
     file_name = urllib.unquote(str(request.get_full_path().split('/')[-1]))
     file_path = ('/root/book/upload/' + file_name.decode('utf-8'))
