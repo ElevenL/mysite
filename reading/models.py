@@ -12,7 +12,7 @@ class BookInfo(models.Model):
     imgurl = models.CharField(max_length=2048)
     score = models.IntegerField()
     path = models.CharField(max_length=150)
-    file = models.FileField(upload_to='./upload/')
+    file = models.FileField(upload_to='./upload/', default='./upload/aaa')
     class Meta:
         ordering = ('-score',)
 
