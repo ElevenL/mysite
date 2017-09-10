@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import render
+from django.http import StreamingHttpResponse
 from reading.models import BookInfo
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.decorators.csrf import csrf_protect
@@ -88,3 +89,23 @@ def search(request):
                    'p_page': str(p_page),
                    'n_page': str(n_page),
                     'name_kw': urllib.unquote(name_kw)})
+
+def download(request):
+    # do something...
+
+    def file_iterator(file_name, chunk_size=512):
+        with open(file_name) as f:
+            while True:
+                c = f.read(chunk_size)
+                if c:
+                    yield c
+                else:
+                    break
+
+    the_file_name = "Algorithms_4th_Edition.pdf"
+    file_path = '/root/book/download/Algorithms_4th_Edition.pdf'
+    response = StreamingHttpResponse(file_iterator(file_path))
+    response['Content-Type'] = 'application/octet-stream'
+    response['Content-Disposition'] = 'attachment;filename="{0}"'.format(the_file_name)
+
+    return response
