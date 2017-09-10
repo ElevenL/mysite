@@ -93,7 +93,7 @@ def search(request):
 def download(request):
     # do something...
     file_name = urllib.unquote(str(request.get_full_path()).split('/')[-1])
-    file_path = '/root/book/download/'.encode('utf-8') + file_name.encode('utf-8')
+    file_path = str('/root/book/download/'.encode('utf-8') + file_name.encode('utf-8'))
     def file_iterator(file_name, chunk_size=512):
         with open(file_name) as f:
             while True:
