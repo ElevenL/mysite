@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Bootstrap 实例 - 默认的导航栏</title>
-   <link href="../static/css/bootstrap.min.css" rel="stylesheet">
-   <link href="../static/css/mystyle.css" rel="stylesheet">
-   <script src="../static/scripts/jquery.min.js"></script>
-   <script src="../static/js/bootstrap.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reading</title>
+    {% load static %}
+    <link href="{% static '/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static '/css/mystyle.css' %}" rel="stylesheet">
+    <script src="{% static '/scripts/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static '/js/bootstrap.min.js' %}"></script>
 </head>
 <body>
 <!--导航栏-->
@@ -17,9 +18,8 @@
    </div>
    <div>
       <ul class="nav navbar-nav pull-right">
-         <li class="active"><a href="#">书库</a></li>
-         <li><a href="#">上传</a></li>
-         <li><a href="#">个人中心</a></li>
+         <li><a href="/login">登录</a></li>
+         <li class="active"><a href="#">注册</a></li>
       </ul>
    </div>
 </nav>
@@ -64,6 +64,7 @@
       </div>
    </div>
 </div>
+
 
 </body>
 </html>
