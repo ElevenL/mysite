@@ -7,6 +7,7 @@ from reading.models import BookInfo
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.decorators.csrf import csrf_protect
 import urllib
+from django.http import HttpResponseRedirect
 
 # Create your views here.
 def make_pages(cpage, allcount):
@@ -123,3 +124,12 @@ def download(request):
     response['Content-Disposition'] = 'attachment;filename="{0}"'.format(file_name.decode('utf-8'))
 
     return response
+
+def upload(request):
+    if request.method == 'POST':
+        form = BookInfo(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.path = '/download/' + post.file.name.spit('/')[-1]
+            post.save()
+    return HttpResponseRedirect('/')
