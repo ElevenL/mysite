@@ -16,6 +16,11 @@ class BookInfo(models.Model):
     class Meta:
         ordering = ('-score',)
 
+class UserInfo(forms.ModelForm):
+    pass
+
+
+
 class BookInfoForm(forms.ModelForm):
     class Meta:
         model = BookInfo
