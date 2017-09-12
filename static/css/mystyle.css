@@ -19,10 +19,3 @@ body div.book-li {
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-
-.book-card p.book-name {
-    width: 200px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
