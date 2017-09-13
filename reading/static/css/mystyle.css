@@ -13,15 +13,15 @@ body div.book-li {
     height:150px;
 }
 
-.book-card p.book-name {
-    width: 200px;
+.book-card h5.book-name {
+    width: 150px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
-.book-card p.book-name {
-    width: 200px;
+.book-card p.book-author {
+    width: 150px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
