@@ -8,5 +8,6 @@ from reading import models
 
 class BookInfoAdmin(admin.ModelAdmin):
     list_display = ('name', 'author')
+    search_fields = ('name', 'author')
 
 admin.site.register(models.BookInfo, BookInfoAdmin)
