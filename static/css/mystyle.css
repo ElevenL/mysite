@@ -13,8 +13,8 @@ body div.book-li {
     height:150px;
 }
 
-.book-card h6.book-name {
-    width: 200px;
+.book-card h5.book-name {
+    width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
