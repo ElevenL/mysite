@@ -13,7 +13,7 @@ body div.book-li {
     height:150px;
 }
 
-.book-card h5.book-name {
+.book-card p.book-name {
     width: 150px;
     overflow: hidden;
     text-overflow: ellipsis;
