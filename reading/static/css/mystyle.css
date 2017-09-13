@@ -14,14 +14,14 @@ body div.book-li {
 }
 
 .book-card p.book-name {
-    width: 150px;
+    width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
 .book-card p.book-author {
-    width: 150px;
+    width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
