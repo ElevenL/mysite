@@ -155,7 +155,7 @@ def register(request):
                 errors = []
                 if (password2 != password1):
                     errors.append("两次输入的密码不一致!")
-                    return render_to_response('register.html',{'errors':errors})
+                    return render('register.html',{'errors':errors})
                     #return HttpResponse('两次输入的密码不一致!,请重新输入密码')
                 password = password2
                 email = uf.cleaned_data['email']
