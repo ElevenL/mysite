@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.shortcuts import render
+from django.shortcuts import render, render_to_response
+from django import forms
+import pdb
 from django.http import StreamingHttpResponse
-from reading.models import BookInfo
+from reading.models import BookInfo,UserInfo
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.decorators.csrf import csrf_protect
 import urllib
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect,HttpResponse
 
 # Create your views here.
 def make_pages(cpage, allcount):
@@ -135,11 +137,64 @@ def upload(request):
     return HttpResponseRedirect('/')
 
 def register(request):
-    if request.method == 'POST':
-        pass
-    else:
-        return render(request, 'register.html')
+    # curtime=time.strftime("%Y-%m-%d %H:%M:%S",time.localtime());
 
+    if request.method == "POST":
+        uf = UserForm(request.POST)
+        if uf.is_valid():
+            #获取表单信息
+            username = uf.cleaned_data['username']
+            #pdb.set_trace()
+            #try:
+            filterResult = UserInfo.objects.filter(username = username)
+            if len(filterResult)>0:
+                return render_to_response('register.html',{"errors":"用户名已存在"})
+            else:
+                password1 = uf.cleaned_data['password1']
+                password2 = uf.cleaned_data['password2']
+                errors = []
+                if (password2 != password1):
+                    errors.append("两次输入的密码不一致!")
+                    return render_to_response('register.html',{'errors':errors})
+                    #return HttpResponse('两次输入的密码不一致!,请重新输入密码')
+                password = password2
+                email = uf.cleaned_data['email']
+                #将表单写入数据库
+                user = UserInfo.objects.create(username=username,password=password1, email=email)
+                #user = User(username=username,password=password,email=email)
+                user.save()
+                # pdb.set_trace()
+                #返回注册成功页面
+                return HttpResponseRedirect('/login/')
+                # return render_to_response('success.html',{'username':username,'operation':"注册"})
+    else:
+        uf = UserForm()
+    return render(request, 'register.html')
 
 def login(request):
-    pass
+    if request.method == "POST":
+        uf = UserFormLogin(request.POST)
+        if uf.is_valid():
+            #获取表单信息
+            username = uf.cleaned_data['username']
+            password = uf.cleaned_data['password']
+            userResult = UserInfo.objects.filter(username=username,password=password)
+            #pdb.set_trace()
+            if (len(userResult)>0):
+                return HttpResponseRedirect('/')
+            else:
+                return  HttpResponse("该用户不存在")
+    else:
+        uf = UserFormLogin()
+    return render(request, "login.html", {'uf': uf})
+
+
+class UserForm(forms.Form):
+    username = forms.CharField(label='用户名',max_length=100)
+    password1 = forms.CharField(label='密码',widget=forms.PasswordInput())
+    password2 = forms.CharField(label='确认密码',widget=forms.PasswordInput())
+    email = forms.EmailField(label='电子邮件')
+
+class UserFormLogin(forms.Form):
+    username = forms.CharField(label='用户名',max_length=100)
+    password = forms.CharField(label='密码',widget=forms.PasswordInput())
