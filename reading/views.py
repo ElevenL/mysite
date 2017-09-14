@@ -133,3 +133,13 @@ def upload(request):
             post.path = '/download/' + post.file.name.spit('/')[-1]
             post.save()
     return HttpResponseRedirect('/')
+
+def register(request):
+    if request.method == 'POST':
+        pass
+    else:
+        return render(request, 'register.html')
+
+
+def login(request):
+    pass
