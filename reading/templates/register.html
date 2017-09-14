@@ -29,7 +29,6 @@
    <div class="row">
       <div class="span8 left">
          <form action  class="form form-horizontal" role="form" method="post">{% csrf_token %}
-            {{ errors }}
             <div class="form-group">
                <label for="inputUserName" class="col-sm-2 control-label">用户名：</label>
                   <div class="col-sm-4">
@@ -54,6 +53,10 @@
                      <input type="password" name="password2" class="form-control" required id="inputPassword2">
                   </div>
             </div>
+            <ul class="errorlist">
+               <li>{{ errors }}</li>
+            </ul>
+            {{ errors }}
             <div class="form-action">
                <div class="col-sm-4" style="float:none;display:block;margin-left:auto;margin-right:auto;">
                   <button type="submit" class="btn btn-primary">注册</button>
