@@ -192,12 +192,12 @@ def login(request):
     return render(request, "login.html", {'uf': uf})
 
 
-class UserForm(forms.ModelForm):
+class UserForm(forms.Form):
     username = forms.CharField(max_length=50)
     password1 = forms.CharField(max_length=50)
     password2 = forms.CharField(max_length=50)
     email = forms.EmailField()
 
-class UserFormLogin(forms.ModelForm):
+class UserFormLogin(forms.Form):
     username = forms.CharField(label='用户名',max_length=100)
     password = forms.CharField(label='密码',widget=forms.PasswordInput())
