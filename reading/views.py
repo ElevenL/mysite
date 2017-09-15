@@ -169,7 +169,7 @@ def register(request):
                 # return render_to_response('success.html',{'username':username,'operation':"注册"})
     else:
         uf = UserForm()
-    return render(request, 'register.html')
+    return render(request, 'register.html', {"errors":"直接换回"})
 
 def login(request):
     if request.method == "POST":
