@@ -140,12 +140,7 @@ def register(request):
     # curtime=time.strftime("%Y-%m-%d %H:%M:%S",time.localtime());
 
     if request.method == "POST":
-        di = {}
-        di['username'] = request.POST['username']
-        di['password1'] = request.POST['password1']
-        di['password2'] = request.POST['password2']
-        di['email'] = request.POST['email']
-        uf = UserForm(di)
+        uf = UserForm(request.POST)
         if uf.is_valid():
             #获取表单信息
             username = uf.cleaned_data['username']
@@ -153,14 +148,14 @@ def register(request):
             #try:
             filterResult = UserInfo.objects.filter(username = username)
             if len(filterResult)>0:
-                return render_to_response('register.html',{"errors":"用户名已存在"})
+                return render(request, 'register.html', {"errors":"用户名已存在"})
             else:
                 password1 = uf.cleaned_data['password1']
                 password2 = uf.cleaned_data['password2']
                 errors = []
                 if (password2 != password1):
                     errors.append("两次输入的密码不一致!")
-                    return render('register.html',{'errors':errors})
+                    return render(request, 'register.html',{'errors':errors})
                     #return HttpResponse('两次输入的密码不一致!,请重新输入密码')
                 password = password2
                 email = uf.cleaned_data['email']
