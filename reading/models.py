@@ -22,8 +22,3 @@ class UserInfo(forms.ModelForm):
     password = models.CharField(max_length=50)
 
 
-
-class BookInfoForm(forms.ModelForm):
-    class Meta:
-        model = BookInfo
-        exclude = ('timestamp',)
