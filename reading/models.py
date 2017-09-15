@@ -16,7 +16,7 @@ class BookInfo(models.Model):
     class Meta:
         ordering = ('-score',)
 
-class UserInfo(forms.ModelForm):
+class UserInfo(models.Model):
     username = models.CharField(max_length=50)
     email = models.EmailField()
     password = models.CharField(max_length=50)
