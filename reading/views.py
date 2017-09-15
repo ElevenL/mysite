@@ -141,10 +141,10 @@ def register(request):
 
     if request.method == "POST":
         uf = UserForm()
-        uf['username'] = request.POST['username']
-        uf['password1'] = request.POST['password1']
-        uf['password2'] = request.POST['password2']
-        uf['email'] = request.POST['email']
+        uf.username = request.POST['username']
+        uf.password1 = request.POST['password1']
+        uf.password2 = request.POST['password2']
+        uf.email = request.POST['email']
         if uf.is_valid():
             #获取表单信息
             username = uf.cleaned_data['username']
