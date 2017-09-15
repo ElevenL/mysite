@@ -26,4 +26,5 @@ urlpatterns = [
     url(r'^search/', views.search),
     url(r'^download/', views.download),
     url(r'^register/', views.register),
+    url(r'^login/', views.login),
 ]
