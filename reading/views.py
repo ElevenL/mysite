@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
+import logging
 from django.shortcuts import render, render_to_response
 from django import forms
 import pdb
@@ -141,6 +141,7 @@ def register(request):
 
     if request.method == "POST":
         uf = UserForm(request.POST)
+        logging.DEBUG(uf)
         if uf.is_valid():
             #获取表单信息
             username = uf.cleaned_data['username']
