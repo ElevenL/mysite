@@ -167,6 +167,9 @@ def register(request):
                 #返回注册成功页面
                 return HttpResponseRedirect('/login/')
                 # return render_to_response('success.html',{'username':username,'operation':"注册"})
+        else:
+            return render(request, 'register.html', {"errors": "表单不正确"})
+
     else:
         uf = UserForm()
     return render(request, 'register.html', {"errors":"直接换回"})
