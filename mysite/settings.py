@@ -131,7 +131,7 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = '/root/book/'
 
 
-AUTH_USER_MODEL = 'reading.User'
+AUTH_USER_MODEL = 'reading.user'
 
 import logging
 logging.basicConfig(
