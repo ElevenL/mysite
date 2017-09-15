@@ -131,6 +131,8 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = '/root/book/'
 
 
+AUTH_USER_MODEL = 'reading.User'
+
 import logging
 logging.basicConfig(
 level = logging.DEBUG,

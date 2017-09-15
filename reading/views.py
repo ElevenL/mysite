@@ -5,7 +5,7 @@ from django.shortcuts import render, render_to_response
 from django import forms
 import pdb
 from django.http import StreamingHttpResponse
-from reading.models import BookInfo,UserInfo
+from reading.models import *
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.decorators.csrf import csrf_protect
 import urllib
@@ -146,7 +146,7 @@ def register(request):
             username = uf.cleaned_data['username']
             #pdb.set_trace()
             #try:
-            filterResult = UserInfo.objects.filter(username = username)
+            filterResult = User.objects.filter(username = username)
             if len(filterResult)>0:
                 return render(request, 'register.html', {"errors":"用户名已存在"})
             else:
@@ -160,7 +160,7 @@ def register(request):
                 password = password2
                 email = uf.cleaned_data['email']
                 #将表单写入数据库
-                user = UserInfo.objects.create(username=username,password=password1, email=email)
+                user = User.objects.create(username=username,password=password1, email=email)
                 #user = User(username=username,password=password,email=email)
                 user.save()
                 # pdb.set_trace()
@@ -181,7 +181,7 @@ def login(request):
             #获取表单信息
             username = uf.cleaned_data['username']
             password = uf.cleaned_data['password']
-            userResult = UserInfo.objects.filter(username=username,password=password)
+            userResult = User.objects.filter(username=username,password=password)
             #pdb.set_trace()
             if (len(userResult)>0):
                 return HttpResponseRedirect('/')
@@ -190,14 +190,3 @@ def login(request):
     else:
         uf = UserFormLogin()
     return render(request, "login.html", {'uf': uf})
-
-
-class UserForm(forms.Form):
-    username = forms.CharField(max_length=50)
-    password1 = forms.CharField(max_length=50)
-    password2 = forms.CharField(max_length=50)
-    email = forms.EmailField()
-
-class UserFormLogin(forms.Form):
-    username = forms.CharField(label='用户名',max_length=100)
-    password = forms.CharField(label='密码',widget=forms.PasswordInput())

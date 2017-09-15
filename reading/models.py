@@ -2,9 +2,10 @@
 from __future__ import unicode_literals
 
 from django.db import models
-
-# Create your models here.
+from django.contrib.auth.models import AbstractUser
 from django import forms
+# Create your models here.
+
 
 class BookInfo(models.Model):
     name = models.CharField(max_length=150)
@@ -16,9 +17,20 @@ class BookInfo(models.Model):
     class Meta:
         ordering = ('-score',)
 
-class UserInfo(models.Model):
-    username = models.CharField(max_length=50)
-    email = models.EmailField()
-    password = models.CharField(max_length=50)
+class User(AbstractUser):
+    Points = models.IntegerField(default=0)
+    accountType = models.IntegerField(default=0)
+
+    class Meta(AbstractUser.Meta):
+        pass
 
 
+class UserForm(forms.Form):
+    username = forms.CharField(max_length=50)
+    password1 = forms.CharField(max_length=50)
+    password2 = forms.CharField(max_length=50)
+    email = forms.EmailField()
+
+class UserFormLogin(forms.Form):
+    username = forms.CharField(max_length=50)
+    password = forms.CharField()
