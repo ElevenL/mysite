@@ -140,8 +140,8 @@ def register(request):
     # curtime=time.strftime("%Y-%m-%d %H:%M:%S",time.localtime());
 
     if request.method == "POST":
-        uf = UserForm(request.POST)
-        logging.debug(uf)
+        uf = UserForm()
+        logging.debug(request.POST['username'])
         if uf.is_valid():
             #获取表单信息
             username = uf.cleaned_data['username']
