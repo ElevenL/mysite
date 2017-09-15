@@ -141,7 +141,7 @@ def register(request):
 
     if request.method == "POST":
         uf = UserForm(request.POST)
-        logging.DEBUG(uf)
+        logging.debug(uf)
         if uf.is_valid():
             #获取表单信息
             username = uf.cleaned_data['username']
