@@ -181,6 +181,7 @@ def login(request):
         uf = UserFormLogin(request.POST)
         if uf.is_valid():
             #获取表单信息
+            logging.debug('uf is avlid!!!!!')
             email = uf.cleaned_data['email']
             password = uf.cleaned_data['password']
             user = authenticate(email=email, password=password)
@@ -191,4 +192,5 @@ def login(request):
                 return HttpResponseRedirect('/login/')
     else:
         uf = UserFormLogin()
-    return render(request, "login.html", {'uf': uf})
+        logging.debug('uf is not avlid!!!!!')
+    return render(request, "login.html")
