@@ -182,8 +182,8 @@ def login(request):
         if uf.is_valid():
             #获取表单信息
             logging.debug('uf is avlid!!!!!')
-            email = uf.cleaned_data['email']
-            password = uf.cleaned_data['password']
+            email = uf.email
+            password = uf.password
             user = authenticate(email=email, password=password)
             logging.debug(user)
             if user is not None:
