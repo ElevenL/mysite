@@ -18,8 +18,7 @@ class BookInfo(models.Model):
         ordering = ('-score',)
 
 class User(AbstractUser):
-    Points = models.IntegerField()
-    accountType = models.IntegerField()
+    pass
 
 class UserForm(forms.Form):
     username = forms.CharField(max_length=50)
