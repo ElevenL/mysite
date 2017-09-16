@@ -21,10 +21,6 @@ class User(AbstractUser):
     Points = models.IntegerField()
     accountType = models.IntegerField()
 
-    class Meta(AbstractUser.Meta):
-        pass
-
-
 class UserForm(forms.Form):
     username = forms.CharField(max_length=50)
     password1 = forms.CharField(max_length=50)
