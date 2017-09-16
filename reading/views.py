@@ -185,6 +185,7 @@ def login(request):
             email = uf.cleaned_data['email']
             password = uf.cleaned_data['password']
             user = authenticate(email=email, password=password)
+            logging.debug(user)
             if user is not None:
                 login(request, user)
                 return HttpResponseRedirect('/')
@@ -192,5 +193,4 @@ def login(request):
                 return HttpResponseRedirect('/login/')
     else:
         uf = UserFormLogin()
-        logging.debug('uf is not avlid!!!!!')
     return render(request, "login.html")
