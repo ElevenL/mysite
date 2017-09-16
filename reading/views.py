@@ -72,8 +72,7 @@ def index(request):
     :param request:
     :return:
     '''
-    # if not request.user.is_authenticated:
-    #     return HttpResponseRedirect('/login/')
+    logging.debug(request.user)
     page = int(request.GET.get('page', '1'))
     allBookCounts = BookInfo.objects.count()
     start_id, end_id, page_list, p_page, n_page = make_pages(page, allBookCounts)
@@ -85,14 +84,13 @@ def index(request):
                    'p_page': str(p_page),
                    'n_page': str(n_page)})
 
+@login_required
 def search(request):
     '''
     书库搜索
     :param request:
     :return:
     '''
-    if not request.user.is_authenticated:
-        return HttpResponseRedirect('/login/')
     page = int(request.GET.get('page', '1'))
     name_kw = request.GET.get('q', 'all')
     if name_kw == 'all':
@@ -110,6 +108,7 @@ def search(request):
                    'n_page': str(n_page),
                     'name_kw': urllib.unquote(name_kw)})
 
+@login_required
 def download(request):
     '''
     下载图书
@@ -134,6 +133,7 @@ def download(request):
 
     return response
 
+@login_required
 def upload(request):
     if request.method == 'POST':
         form = BookInfo(request.POST)
@@ -149,10 +149,7 @@ def register(request):
     if request.method == "POST":
         uf = UserForm(request.POST)
         if uf.is_valid():
-            #获取表单信息
             username = uf.cleaned_data['username']
-            #pdb.set_trace()
-            #try:
             filterResult = User.objects.filter(username = username)
             if len(filterResult)>0:
                 return render(request, 'register.html', {"errors":"用户名已存在"})
@@ -163,17 +160,10 @@ def register(request):
                 if (password2 != password1):
                     errors.append("两次输入的密码不一致!")
                     return render(request, 'register.html',{'errors':errors[0]})
-                    #return HttpResponse('两次输入的密码不一致!,请重新输入密码')
-                password = password2
                 email = uf.cleaned_data['email']
-                #将表单写入数据库
                 user = User.objects.create_user(username=username,password=password1, email=email)
-                # #user = User(username=username,password=password,email=email)
-                # user.save()
-                # # pdb.set_trace()
                 # #返回注册成功页面
                 return HttpResponseRedirect('/login/')
-                # return render_to_response('success.html',{'username':username,'operation':"注册"})
         else:
             return render(request, 'register.html', {"errors": "表单不正确"})
 
