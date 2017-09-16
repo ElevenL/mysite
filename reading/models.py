@@ -17,12 +17,12 @@ class BookInfo(models.Model):
     class Meta:
         ordering = ('-score',)
 
-class User(AbstractUser):
-    Points = models.IntegerField(default=0)
-    accountType = models.IntegerField(default=0)
-
-    class Meta(AbstractUser.Meta):
-        pass
+# class User(AbstractUser):
+#     Points = models.IntegerField(default=0)
+#     accountType = models.IntegerField(default=0)
+#
+#     class Meta(AbstractUser.Meta):
+#         pass
 
 
 class UserForm(forms.Form):

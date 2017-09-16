@@ -5,6 +5,7 @@ from django.shortcuts import render, render_to_response
 from django import forms
 import pdb
 from django.http import StreamingHttpResponse
+from django.contrib.auth.models import User
 from reading.models import *
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.decorators.csrf import csrf_protect
