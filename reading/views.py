@@ -185,7 +185,8 @@ def login(request):
             logging.debug('uf is avlid!!!!!')
             email = ulf.cleaned_data['email']
             password = ulf.cleaned_data['password']
-            user = EmailBackend.authenticate(email=email, password=password)
+            bk = EmailBackend()
+            user = bk.authenticate(email=email, password=password)
             logging.debug(email)
             logging.debug(password)
             logging.debug(user)
