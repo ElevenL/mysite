@@ -72,6 +72,8 @@ def index(request):
     :param request:
     :return:
     '''
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect('/login/')
     page = int(request.GET.get('page', '1'))
     allBookCounts = BookInfo.objects.count()
     start_id, end_id, page_list, p_page, n_page = make_pages(page, allBookCounts)
