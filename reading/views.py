@@ -146,7 +146,7 @@ def register(request):
             username = uf.cleaned_data['username']
             #pdb.set_trace()
             #try:
-            filterResult = MyUser.objects.filter(username = username)
+            filterResult = User.objects.filter(username = username)
             if len(filterResult)>0:
                 return render(request, 'register.html', {"errors":"用户名已存在"})
             else:
@@ -160,7 +160,7 @@ def register(request):
                 password = password2
                 email = uf.cleaned_data['email']
                 #将表单写入数据库
-                user = MyUser.objects.create(username=username,password=password1, email=email)
+                user = User.objects.create(username=username,password=password1, email=email)
                 #user = User(username=username,password=password,email=email)
                 user.save()
                 # pdb.set_trace()
@@ -181,7 +181,7 @@ def login(request):
             #获取表单信息
             username = uf.cleaned_data['username']
             password = uf.cleaned_data['password']
-            userResult = MyUser.objects.filter(username=username,password=password)
+            userResult = User.objects.filter(username=username,password=password)
             #pdb.set_trace()
             if (len(userResult)>0):
                 return HttpResponseRedirect('/')
