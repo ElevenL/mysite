@@ -178,12 +178,13 @@ def register(request):
 
 def login(request):
     if request.method == "POST":
-        uf = UserFormLogin(request.POST)
-        if uf.is_valid():
+        ulf = UserFormLogin(request.POST)
+        logging.debug(ulf)
+        if ulf.is_valid():
             #获取表单信息
             logging.debug('uf is avlid!!!!!')
-            email = uf.email
-            password = uf.password
+            email = ulf.email
+            password = ulf.password
             user = authenticate(email=email, password=password)
             logging.debug(user)
             if user is not None:
