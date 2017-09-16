@@ -12,6 +12,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.decorators.csrf import csrf_protect
 import urllib
 from django.http import HttpResponseRedirect,HttpResponse
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def make_pages(cpage, allcount):
@@ -64,7 +65,7 @@ def make_pages(cpage, allcount):
             n_page = page_list[-1] + 1
     return start_id,end_id,page_list,p_page,n_page
 
-# @csrf_protect
+@login_required(login_url='/login/')
 def index(request):
     '''
     浏览书库
