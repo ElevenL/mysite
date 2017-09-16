@@ -181,9 +181,9 @@ def login(request):
         uf = UserFormLogin(request.POST)
         if uf.is_valid():
             #获取表单信息
-            username = uf.cleaned_data['username']
+            email = uf.cleaned_data['email']
             password = uf.cleaned_data['password']
-            user = authenticate(username=username, password=password)
+            user = authenticate(email=email, password=password)
             if user is not None:
                 login(request, user)
                 return HttpResponseRedirect('/')
