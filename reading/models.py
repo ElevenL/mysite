@@ -32,5 +32,5 @@ class UserForm(forms.Form):
     email = forms.EmailField()
 
 class UserFormLogin(forms.Form):
-    email = forms.EmailField()
+    username = forms.CharField()
     password = forms.CharField()

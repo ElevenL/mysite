@@ -7,7 +7,6 @@ import pdb
 from django.http import StreamingHttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
-from reading.backends import EmailBackend
 from reading.models import *
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.decorators.csrf import csrf_protect
@@ -183,11 +182,10 @@ def login(request):
         if ulf.is_valid():
             #获取表单信息
             logging.debug('uf is avlid!!!!!')
-            email = ulf.cleaned_data['email']
+            username = ulf.cleaned_data['username']
             password = ulf.cleaned_data['password']
-            bk = EmailBackend()
-            user = bk.authenticate(request, email=email, password=password)
-            logging.debug(email)
+            user = authenticate(username=username, password=password)
+            logging.debug(username)
             logging.debug(password)
             logging.debug(user)
             if user is not None:
