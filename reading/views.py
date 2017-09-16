@@ -176,7 +176,7 @@ def register(request):
         uf = UserForm()
     return render(request, 'register.html', {"errors":"直接换回"})
 
-def login(request):
+def userlogin(request):
     if request.method == "POST":
         ulf = UserFormLogin(request.POST)
         if ulf.is_valid():
