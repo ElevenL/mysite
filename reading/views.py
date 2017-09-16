@@ -6,6 +6,7 @@ from django import forms
 import pdb
 from django.http import StreamingHttpResponse
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
 from reading.models import *
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.decorators.csrf import csrf_protect
@@ -182,12 +183,12 @@ def login(request):
             #获取表单信息
             username = uf.cleaned_data['username']
             password = uf.cleaned_data['password']
-            userResult = User.objects.filter(username=username,password=password)
-            #pdb.set_trace()
-            if (len(userResult)>0):
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
                 return HttpResponseRedirect('/')
             else:
-                return  HttpResponse("该用户不存在")
+                return HttpResponseRedirect('/login/')
     else:
         uf = UserFormLogin()
     return render(request, "login.html", {'uf': uf})
