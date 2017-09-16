@@ -189,7 +189,7 @@ def login(request):
             logging.debug(password)
             logging.debug(user)
             if user is not None:
-                login(user)
+                login(request,user)
                 return HttpResponseRedirect('/')
             else:
                 return HttpResponseRedirect('/login/')
