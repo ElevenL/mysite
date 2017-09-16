@@ -179,13 +179,14 @@ def register(request):
 def login(request):
     if request.method == "POST":
         ulf = UserFormLogin(request.POST)
-        logging.debug(ulf)
         if ulf.is_valid():
             #获取表单信息
             logging.debug('uf is avlid!!!!!')
             email = ulf.cleaned_data['email']
             password = ulf.cleaned_data['password']
             user = authenticate(email=email, password=password)
+            logging.debug(email)
+            logging.debug(password)
             logging.debug(user)
             if user is not None:
                 login(request, user)
