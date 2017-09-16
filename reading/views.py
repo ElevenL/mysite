@@ -162,11 +162,11 @@ def register(request):
                 password = password2
                 email = uf.cleaned_data['email']
                 #将表单写入数据库
-                user = User.objects.create(username=username,password=password1, email=email)
-                #user = User(username=username,password=password,email=email)
-                user.save()
-                # pdb.set_trace()
-                #返回注册成功页面
+                user = User.objects.create_user(username=username,password=password1, email=email)
+                # #user = User(username=username,password=password,email=email)
+                # user.save()
+                # # pdb.set_trace()
+                # #返回注册成功页面
                 return HttpResponseRedirect('/login/')
                 # return render_to_response('success.html',{'username':username,'operation':"注册"})
         else:
