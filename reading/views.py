@@ -65,15 +65,15 @@ def make_pages(cpage, allcount):
             n_page = page_list[-1] + 1
     return start_id,end_id,page_list,p_page,n_page
 
-@login_required(login_url='/login/')
+@login_required
 def index(request):
     '''
     浏览书库
     :param request:
     :return:
     '''
-    if not request.user.is_authenticated:
-        return HttpResponseRedirect('/login/')
+    # if not request.user.is_authenticated:
+    #     return HttpResponseRedirect('/login/')
     page = int(request.GET.get('page', '1'))
     allBookCounts = BookInfo.objects.count()
     start_id, end_id, page_list, p_page, n_page = make_pages(page, allBookCounts)
@@ -91,6 +91,8 @@ def search(request):
     :param request:
     :return:
     '''
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect('/login/')
     page = int(request.GET.get('page', '1'))
     name_kw = request.GET.get('q', 'all')
     if name_kw == 'all':

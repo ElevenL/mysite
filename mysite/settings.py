@@ -27,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["ss.tdcat.cn"]
 
+LOGIN_URL = '/login/'
 
 # Application definition
 
