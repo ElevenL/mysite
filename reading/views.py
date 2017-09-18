@@ -163,7 +163,7 @@ def register(request):
                 email = uf.cleaned_data['email']
                 user = User.objects.create_user(username=username,password=password1, email=email)
                 # #返回注册成功页面
-                return HttpResponseRedirect('/login/')
+                return render(request, 'register_success.html')
         else:
             return render(request, 'register.html', {"errors": "表单不正确"})
 
