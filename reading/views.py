@@ -185,6 +185,7 @@ def userlogin(request):
             logging.debug(user)
             if user is not None:
                 login(request,user)
+                request.session.set_expiry(12 * 3600)
                 return HttpResponseRedirect('/')
             else:
                 return HttpResponseRedirect('/login/')
