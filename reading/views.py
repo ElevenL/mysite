@@ -188,7 +188,7 @@ def userlogin(request):
                 request.session.set_expiry(12 * 3600)
                 return HttpResponseRedirect('/')
             else:
-                return HttpResponseRedirect('/login/')
+                return render(request, "login.html", {'errors': "用户名密码不正确"})
     else:
-        uf = UserFormLogin()
+        ulf = UserFormLogin()
     return render(request, "login.html")
