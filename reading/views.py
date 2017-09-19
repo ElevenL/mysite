@@ -146,7 +146,7 @@ def upload(request):
 @login_required
 def uploadfile(request):
     if request.method == 'POST':
-        uff = UploadFileForm(request.FILES)
+        uff = UploadFileForm(request.POST, request.FILES)
         logging.debug(uff.is_valid())
         if uff.is_valid():
             bookName = urllib.unquote(str(request.get_full_path().split('/')[-1])).decode('utf-8')
