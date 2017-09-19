@@ -153,8 +153,8 @@ def uploadfile(request):
             bookInfo = BookInfo.objects.filter(name=bookName)[0]
             uploadfile = uff.cleaned_data['file']
             bookInfo.file = uploadfile
-            logging.debug(bookInfo.file.filename)
-            bookInfo.path = '/download/' + bookInfo.file.filename
+            logging.debug(bookInfo.file.name)
+            bookInfo.path = '/download/' + bookInfo.file.name
             logging.debug(bookInfo.path)
             bookInfo.save()
     else:
