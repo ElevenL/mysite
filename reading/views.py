@@ -143,6 +143,21 @@ def upload(request):
             post.save()
     return HttpResponseRedirect('/')
 
+@login_required
+def uploadfile(request):
+    if request.method == 'POST':
+        form = BookInfo(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.path = '/download/' + post.file.name.spit('/')[-1]
+            post.save()
+    else:
+        bookName = urllib.unquote(str(request.get_full_path().split('/')[-1])).decode('utf-8')
+        bookInfo = BookInfo.objects.filter(name=bookName)[0]
+        return render(request, 'uploadfile.html', bookInfo)
+    return HttpResponseRedirect('/')
+
+
 def register(request):
     # curtime=time.strftime("%Y-%m-%d %H:%M:%S",time.localtime());
 

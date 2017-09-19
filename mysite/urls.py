@@ -27,4 +27,5 @@ urlpatterns = [
     url(r'^download/', views.download),
     url(r'^register/', views.register),
     url(r'^login/', views.userlogin),
+    url(r'^uploadfile/', views.uploadfile),
 ]
