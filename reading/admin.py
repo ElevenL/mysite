@@ -12,7 +12,7 @@ class BookInfoAdmin(admin.ModelAdmin):
     list_display = ('name', 'author')
     search_fields = ('name', 'author')
 
-class ProfileInline(admin.StackInline):
+class ProfileInline(admin.StackedInline):
     model = UserProfile
     verbose_name = 'profile'
 
