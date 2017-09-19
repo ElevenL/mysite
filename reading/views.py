@@ -154,7 +154,11 @@ def uploadfile(request):
     else:
         bookName = urllib.unquote(str(request.get_full_path().split('/')[-1])).decode('utf-8')
         bookInfo = BookInfo.objects.filter(name=bookName)[0]
-        return render(request, 'uploadfile.html', bookInfo)
+        book = {}
+        book['name'] = bookInfo.name
+        book['author'] = bookInfo.author
+        boo['score'] = bookInfo.score
+        return render(request, 'uploadfile.html', {'book':book})
     return HttpResponseRedirect('/')
 
 
