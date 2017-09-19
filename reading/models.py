@@ -5,6 +5,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django import forms
 from django.contrib.auth.models import User
+import os
 # Create your models here.
 
 
@@ -15,6 +16,10 @@ class BookInfo(models.Model):
     score = models.IntegerField()
     path = models.CharField(max_length=150)
     file = models.FileField(upload_to='./upload/', default='./upload/aaa')
+
+    def filename(self):
+        return os.path.basename(self.file.name)
+
     class Meta:
         ordering = ('-score',)
 
