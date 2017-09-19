@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django import forms
+from django.contrib.auth.models import User
 # Create your models here.
 
 
@@ -17,13 +18,10 @@ class BookInfo(models.Model):
     class Meta:
         ordering = ('-score',)
 
-# class User(AbstractUser):
-#     Points = models.IntegerField(default=0)
-#     accountType = models.IntegerField(default=0)
-#
-#     class Meta(AbstractUser.Meta):
-#         pass
-
+class UserProfile(models.Model):
+    user = models.OneToOneField(User) # 关联自带的User结构
+    score = models.IntegerField(default=0)
+    userType = models.IntegerField(default=0)
 
 class UserForm(forms.Form):
     username = forms.CharField(max_length=50)
