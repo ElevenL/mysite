@@ -157,7 +157,7 @@ def uploadfile(request):
         book = {}
         book['name'] = bookInfo.name
         book['author'] = bookInfo.author
-        boo['score'] = bookInfo.score
+        book['score'] = bookInfo.score
         return render(request, 'uploadfile.html', {'book':book})
     return HttpResponseRedirect('/')
 
