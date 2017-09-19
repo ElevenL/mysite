@@ -146,11 +146,14 @@ def upload(request):
 @login_required
 def uploadfile(request):
     if request.method == 'POST':
-        form = UploadFileForm(request.FILES)
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.path = '/download/' + post.file.name.spit('/')[-1]
-            post.save()
+        uff = UploadFileForm(request.FILES)
+        logging.debug(uff.is_valid())
+        if uff.is_valid():
+            bookName = urllib.unquote(str(request.get_full_path().split('/')[-1])).decode('utf-8')
+            bookInfo = BookInfo.objects.filter(name=bookName)[0]
+            uploadfile = uff.cleaned_data['file']
+            bookInfo.file = uploadfile
+            bookInfo.save()
     else:
         bookName = urllib.unquote(str(request.get_full_path().split('/')[-1])).decode('utf-8')
         bookInfo = BookInfo.objects.filter(name=bookName)[0]
@@ -159,7 +162,7 @@ def uploadfile(request):
         book['author'] = bookInfo.author
         book['score'] = bookInfo.score
         return render(request, 'uploadfile.html', {'book':book})
-    # return HttpResponseRedirect('/')
+    return HttpResponseRedirect('/')
 
 
 def register(request):
