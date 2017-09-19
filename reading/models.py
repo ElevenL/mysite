@@ -32,3 +32,6 @@ class UserForm(forms.Form):
 class UserFormLogin(forms.Form):
     username = forms.CharField()
     password = forms.CharField()
+
+class UploadFileForm(forms.Form):
+    file = forms.FileField()

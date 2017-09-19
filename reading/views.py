@@ -146,7 +146,7 @@ def upload(request):
 @login_required
 def uploadfile(request):
     if request.method == 'POST':
-        form = BookInfo(request.POST)
+        form = UploadFileForm(request.FILES)
         if form.is_valid():
             post = form.save(commit=False)
             post.path = '/download/' + post.file.name.spit('/')[-1]
