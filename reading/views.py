@@ -153,6 +153,9 @@ def uploadfile(request):
             bookInfo = BookInfo.objects.filter(name=bookName)[0]
             uploadfile = uff.cleaned_data['file']
             bookInfo.file = uploadfile
+            logging.debug(bookInfo.file.filename)
+            bookInfo.path = '/download/' + bookInfo.file.filename
+            logging.debug(bookInfo.path)
             bookInfo.save()
     else:
         bookName = urllib.unquote(str(request.get_full_path().split('/')[-1])).decode('utf-8')
