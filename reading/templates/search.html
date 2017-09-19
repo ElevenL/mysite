@@ -17,6 +17,27 @@
     </div>
     <div class="row book-li">
     {% for book in books %}
+        {% if book.path == '/' %}
+        <div class="col-xs-6 col-md-2">
+            <div class="well book-card">
+                <div class="book-cover clearfix">
+                    <a>
+                        <img class="img-rounded img-responsive" src="{{ book.imgurl }}">
+                    </a>
+                </div>
+                <div class="caption">
+                    <p class="book-name" title="{{ book.name }}">{{ book.name }}</p>
+                    <p class="book-author" title="{{ book.author }}">{{ book.author }}</p>
+                    <p>
+                        <a class='book-down btn btn-mini btn-primary' href="/uploadfile/{{ book.name }}">
+                            <i class="fa fa-download" aria-hidden="true"></i>上传
+                        </a>
+                        <span class="badge pull-right", title="评分">{{ book.score }}</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        {% else %}
         <div class="col-xs-6 col-md-2">
             <div class="well book-card">
                 <div class="book-cover clearfix">
@@ -36,6 +57,7 @@
                 </div>
             </div>
         </div>
+        {% endif %}
     {% endfor %}
     </div>
 
