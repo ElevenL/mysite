@@ -20,7 +20,7 @@ class BookInfo(models.Model):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User) # 关联自带的User结构
-    score = models.IntegerField(default=0)
+    score = models.IntegerField(default=1)
     userType = models.IntegerField(default=0)
 
 class UserForm(forms.Form):
