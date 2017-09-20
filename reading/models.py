@@ -37,7 +37,7 @@ def create_user_profile(sender, instance, created, **kwargs):
 
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
-    instance.UserProfile.save()
+    instance.userprofile.save()
 
 class UserForm(forms.Form):
     username = forms.CharField(max_length=50)
