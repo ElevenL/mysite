@@ -17,6 +17,8 @@ from django.conf.urls import *
 from django.contrib import admin
 from django.views.generic import RedirectView
 from reading import views
+from django.conf.urls.static import static
+from django.conf import settings
 admin.autodiscover()
 
 urlpatterns = [
@@ -28,4 +30,4 @@ urlpatterns = [
     url(r'^register/', views.register),
     url(r'^login/', views.userlogin),
     url(r'^uploadfile/', views.uploadfile),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
