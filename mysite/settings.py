@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '^j*7@mq4g%1*l=1t=_sh9h5_dfee4vanb+&6oevcyx3x#h(v=9'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["ss.tdcat.cn"]
 
@@ -124,10 +124,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
-STATIC_URL = '/static/'
+# STATIC_URL = '/static/'
 # STATICFILES_DIRS = (
-#      os.path.join(BASE_DIR, 'static').replace('\\', '/'),
+#      os.path.join(BASE_DIR, 'static')
 # )
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_ROOT = '/root/book/'
 
