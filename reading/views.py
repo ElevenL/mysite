@@ -164,7 +164,7 @@ def uploadfile(request):
                     bookInfo.file = uploadfile
                     bookInfo.path = '/download/' + bookInfo.file.name
                     bookInfo.save()
-                    nouwuser.save
+                    nouwuser.save()
                     break
         return HttpResponseRedirect('/')
     else:
