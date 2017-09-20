@@ -132,7 +132,10 @@ STATIC_ROOT = "/var/mysite/static/"
 
 MEDIA_ROOT = '/root/book/'
 
-
+STATICFILES_FINDERS = (
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+    "django.contrib.staticfiles.finders.FileSystemFinder"
+)
 # AUTH_USER_MODEL = 'reading.User'
 
 import logging
