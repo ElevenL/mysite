@@ -6,6 +6,8 @@ from django.contrib.auth.models import AbstractUser
 from django import forms
 from django.contrib.auth.models import User
 import os
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 # Create your models here.
 
 
@@ -24,9 +26,18 @@ class BookInfo(models.Model):
         ordering = ('-score',)
 
 class UserProfile(models.Model):
-    user = models.OneToOneField(User) # 关联自带的User结构
+    user = models.OneToOneField(User, on_delete=models.CASCADE) # 关联自带的User结构
     score = models.IntegerField(default=1)
     userType = models.IntegerField(default=0)
+
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        UserProfile.objects.create(user=instance)
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.UserProfile.save()
 
 class UserForm(forms.Form):
     username = forms.CharField(max_length=50)
