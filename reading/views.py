@@ -121,7 +121,7 @@ def download(request):
     username = request.user.username
     logging.debug(username)
     nouwuser = User.objects.get(username = username)
-    nouwuser.UserProfile.score = nouwuser.UserProfile.score - 1
+    nouwuser.userprofile.score = nouwuser.userprofile.score - 1
     def file_iterator(file_name, chunk_size=512):
         with open(file_name) as f:
             while True:
