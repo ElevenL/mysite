@@ -118,10 +118,10 @@ def download(request):
     # do something...
     file_name = urllib.unquote(str(request.get_full_path().split('/')[-1]))
     file_path = ('/root/book/upload/' + file_name.decode('utf-8'))
-    # username = request.user
-    # logging.debug(username)
-    # nouwuser = User.objects.filter(username = username)[0]
-    # nouwuser.score = nouwuser.score - 1
+    username = request.user.username
+    logging.debug(username)
+    nouwuser = User.objects.get(username = username)
+    nouwuser.UserProfile.score = nouwuser.UserProfile.score - 1
     def file_iterator(file_name, chunk_size=512):
         with open(file_name) as f:
             while True:
@@ -134,7 +134,7 @@ def download(request):
     response = StreamingHttpResponse(file_iterator(file_path))
     response['Content-Type'] = 'application/octet-stream'
     response['Content-Disposition'] = 'attachment;filename="{0}"'.format(file_name.decode('utf-8'))
-    # nouwuser.save()
+    nouwuser.save()
     return response
 
 @login_required
