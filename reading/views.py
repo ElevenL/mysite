@@ -119,8 +119,9 @@ def download(request):
     file_name = urllib.unquote(str(request.get_full_path().split('/')[-1]))
     file_path = ('/root/book/upload/' + file_name.decode('utf-8'))
     username = request.user
+    logging.debug(username)
     nouwuser = User.objects.filter(username = username)[0]
-    nouwuser.UserProfile.score = nouwuser.UserProfile.score - 1
+    nouwuser.userprofile.score = nouwuser.UserProfile.score - 1
     def file_iterator(file_name, chunk_size=512):
         with open(file_name) as f:
             while True:
