@@ -151,16 +151,22 @@ def upload(request):
 def uploadfile(request):
     if request.method == 'POST':
         uff = UploadFileForm(request.POST, request.FILES)
-        logging.debug(uff.is_valid())
         if uff.is_valid():
+            username = request.user.username
+            logging.debug(username)
+            nouwuser = User.objects.get(username=username)
+            nouwuser.userprofile.score = nouwuser.userprofile.score + 1
             bookName = urllib.unquote(str(request.get_full_path().split('/')[-1])).decode('utf-8')
-            bookInfo = BookInfo.objects.filter(name=bookName)[0]
             uploadfile = uff.cleaned_data['file']
-            bookInfo.file = uploadfile
-            logging.debug(bookInfo.file.name)
-            bookInfo.path = '/download/' + bookInfo.file.name
-            logging.debug(bookInfo.path)
-            bookInfo.save()
+            bookInfos = BookInfo.objects.filter(name=bookName)
+            for bookInfo in bookInfos:
+                if bookInfo.path == '/':
+                    bookInfo.file = uploadfile
+                    bookInfo.path = '/download/' + bookInfo.file.name
+                    bookInfo.save()
+                    nouwuser.save
+                    break
+        return HttpResponseRedirect('/')
     else:
         bookName = urllib.unquote(str(request.get_full_path().split('/')[-1])).decode('utf-8')
         bookInfo = BookInfo.objects.filter(name=bookName)[0]
@@ -169,16 +175,16 @@ def uploadfile(request):
         book['author'] = bookInfo.author
         book['score'] = bookInfo.score
         return render(request, 'uploadfile.html', {'book':book})
-    return HttpResponseRedirect('/')
 
 
 def register(request):
-    # curtime=time.strftime("%Y-%m-%d %H:%M:%S",time.localtime());
 
     if request.method == "POST":
         uf = UserForm(request.POST)
         if uf.is_valid():
             username = uf.cleaned_data['username']
+            if len(username) < 4 or len(username) > 20:
+                return render(request, 'register.html', {"errors": "用户名长度应该在4-20个字符之间"})
             filterResult = User.objects.filter(username = username)
             if len(filterResult)>0:
                 return render(request, 'register.html', {"errors":"用户名已存在"})
@@ -187,11 +193,9 @@ def register(request):
                 password2 = uf.cleaned_data['password2']
                 errors = []
                 if (password2 != password1):
-                    errors.append("两次输入的密码不一致!")
-                    return render(request, 'register.html',{'errors':errors[0]})
+                    return render(request, 'register.html',{'errors':"两次输入的密码不一致!"})
                 email = uf.cleaned_data['email']
                 user = User.objects.create_user(username=username,password=password1, email=email)
-                # #返回注册成功页面
                 return render(request, 'register_success.html')
         else:
             return render(request, 'register.html', {"errors": "表单不正确"})
