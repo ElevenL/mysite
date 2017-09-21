@@ -142,6 +142,7 @@ def upload(request):
     if request.method == 'POST':
         bif = BookInfoForm(request.POST, request.FILES)
         logging.debug(bif)
+        logging.debug(bif.cleaned_data['imgurl'])
         if bif.is_valid():
             username = request.user.username
             logging.debug(username)
