@@ -140,12 +140,28 @@ def download(request):
 @login_required
 def upload(request):
     if request.method == 'POST':
-        form = BookInfo(request.POST)
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.path = '/download/' + post.file.name.spit('/')[-1]
-            post.save()
-    return HttpResponseRedirect('/')
+        bif = BookInfoForm(request.POST, request.FILES)
+        if bif.imgurl == None:
+            bif.imgurl = '/abc'
+        if bif.is_valid():
+            username = request.user.username
+            logging.debug(username)
+            nouwuser = User.objects.get(username=username)
+            nouwuser.userprofile.score = nouwuser.userprofile.score + 1
+            bookinfo = BookInfo(
+                name = bif.cleaned_data['name'],
+                author = bif.cleaned_data['author'],
+                imgurl = bif.cleaned_data['imgurl'],
+                score = int(bif.cleaned_data['score']),
+                file = bif.cleaned_data['file'],
+                path = '/download/' + bif.cleaned_data['file'].name
+            )
+            bookinfo.save()
+            nouwuser.save()
+            return HttpResponseRedirect('/')
+    else:
+        pass
+    return render(request, 'upload.html')
 
 @login_required
 def uploadfile(request):

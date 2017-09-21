@@ -25,6 +25,11 @@ class BookInfo(models.Model):
     class Meta:
         ordering = ('-score',)
 
+class BookInfoForm(forms.ModelForm):
+    class Meta:
+        model = BookInfo
+        exclude = ('path',)
+
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE) # 关联自带的User结构
     score = models.IntegerField(default=1)
