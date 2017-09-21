@@ -1,0 +1,63 @@
+<!-- index.html -->
+{% extends "base.html" %}
+{% block content %}
+<!--导航栏-->
+<nav class="navbar navbar-inverse" role="navigation">
+   <div class="navbar-header">
+      <a class="navbar-brand" href="/">阅钉Reading</a>
+   </div>
+   <div>
+      <ul class="nav navbar-nav">
+         <li class="active"><a href="#">书库</a></li>
+         <li><a href="/upload">上传</a></li>
+         <li><a href="/user">个人中心</a></li>
+      </ul>
+   </div>
+</nav>
+
+
+
+<div id="container" class='container'>
+   <div class="row">
+      <div class="span6 left">
+         <form action enctype="multipart/form-data" class="form form-horizontal" role="form" method="post">{% csrf_token %}
+            <div class="form-group">
+               <label for="inputName" class="col-sm-2 control-label">书名：</label>
+                  <div class="col-sm-4">
+                     <input type="text" name="name" class="form-control" id="inputName">
+                  </div>
+            </div>
+            <div class="form-group">
+               <label for="inputauthor" class="col-sm-2 control-label">作者：</label>
+                  <div class="col-sm-4">
+                     <input type="text" name="author" class="form-control" id="inputauthor">
+                  </div>
+            </div>
+             <div class="form-group">
+               <label for="inputimgurl" class="col-sm-2 control-label">图片链接：</label>
+                  <div class="col-sm-4">
+                     <input type="text" name="imgurl" class="form-control" id="inputimgurl">
+                     <span class="helptext">如果忽略，将使用默认图片</span>
+                  </div>
+            </div>
+            <div class="form-group">
+               <label for="inputscore" class="col-sm-2 control-label">评分：</label>
+                  <div class="col-sm-4">
+                     <input type="text" name="score" class="form-control" id="inputscore">
+                  </div>
+            </div>
+            <div class="form-group">
+               <label class="col-sm-2 control-label" for="inputfile">文件输入：</label>
+               <input type="file" name="file" id="inputfile">
+            </div>
+            <div class="form-action form-group">
+               <div class="col-sm-2" style="float:none;display:block;margin-left:auto;margin-right:auto;">
+                  <button type="submit" class="btn btn-primary">保存</button>
+               </div>
+            </div>
+         </form>
+      </div>
+   </div>
+</div>
+
+{% endblock %}
