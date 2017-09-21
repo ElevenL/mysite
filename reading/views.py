@@ -154,10 +154,9 @@ def upload(request):
                 file = bif.cleaned_data['file'],
                 path = '/download/' + bif.cleaned_data['file'].name
             )
-            logging.debug(bookinfo.imgurl)
-            logging.debug(bif.cleaned_data['imgurl'])
-            if bookinfo.imgurl != u'':
+            if bif.cleaned_data['imgurl'] != '':
                 bookinfo.imgurl = bif.cleaned_data['imgurl']
+            logging.debug(bif.cleaned_data['imgurl'])
             bookinfo.save()
             nouwuser.save()
             return HttpResponseRedirect('/')
