@@ -149,11 +149,13 @@ def upload(request):
             bookinfo = BookInfo(
                 name = bif.cleaned_data['name'],
                 author = bif.cleaned_data['author'],
-                imgurl = bif.cleaned_data['imgurl'],
+                # imgurl = bif.cleaned_data['imgurl'],
                 score = int(bif.cleaned_data['score']),
                 file = bif.cleaned_data['file'],
                 path = '/download/' + bif.cleaned_data['file'].name
             )
+            if bookinfo.imgurl != u'':
+                bookinfo.imgurl = bif.cleaned_data['imgurl']
             bookinfo.save()
             nouwuser.save()
             return HttpResponseRedirect('/')
