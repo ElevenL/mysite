@@ -141,8 +141,7 @@ def download(request):
 def upload(request):
     if request.method == 'POST':
         bif = BookInfoForm(request.POST, request.FILES)
-        if bif.imgurl == None:
-            bif.imgurl = '/abc'
+        logging.debug(bif)
         if bif.is_valid():
             username = request.user.username
             logging.debug(username)
