@@ -154,6 +154,8 @@ def upload(request):
                 file = bif.cleaned_data['file'],
                 path = '/download/' + bif.cleaned_data['file'].name
             )
+            logging.debug(bookinfo.imgurl)
+            logging.debug(bif.cleaned_data['imgurl'])
             if bookinfo.imgurl != u'':
                 bookinfo.imgurl = bif.cleaned_data['imgurl']
             bookinfo.save()
