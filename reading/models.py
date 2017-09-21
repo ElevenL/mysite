@@ -14,7 +14,7 @@ from django.dispatch import receiver
 class BookInfo(models.Model):
     name = models.CharField(max_length=150)
     author = models.CharField(max_length=150)
-    imgurl = models.CharField(max_length=2048)
+    imgurl = models.CharField(max_length=2048, default='http://readfree.me/static/img/kindle-boy.png')
     score = models.IntegerField()
     path = models.CharField(max_length=150)
     file = models.FileField(upload_to='./upload/', default='./upload/aaa')
