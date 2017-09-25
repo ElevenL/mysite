@@ -31,4 +31,5 @@ urlpatterns = [
     url(r'^login/', views.userlogin),
     url(r'^uploadfile/', views.uploadfile),
     url(r'^upload/', views.upload),
+    url(r'^contact/', views.contact),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

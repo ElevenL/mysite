@@ -193,6 +193,33 @@ def uploadfile(request):
         book['score'] = bookInfo.score
         return render(request, 'uploadfile.html', {'book':book})
 
+@login_required
+def contact(request):
+    username = request.user.username
+    if request.method == 'POST':
+        bif = BookInfoForm(request.POST, request.FILES)
+        if bif.is_valid():
+            logging.debug(username)
+            nouwuser = User.objects.get(username=username)
+            nouwuser.userprofile.score = nouwuser.userprofile.score + 1
+            bookinfo = BookInfo(
+                name = bif.cleaned_data['name'],
+                author = bif.cleaned_data['author'],
+                # imgurl = bif.cleaned_data['imgurl'],
+                score = int(bif.cleaned_data['score']),
+                file = bif.cleaned_data['file'],
+                path = '/download/' + bif.cleaned_data['file'].name
+            )
+            if bif.cleaned_data['imgurl'] != '':
+                bookinfo.imgurl = bif.cleaned_data['imgurl']
+            logging.debug(bif.cleaned_data['imgurl'])
+            bookinfo.save()
+            nouwuser.save()
+            return HttpResponseRedirect('/')
+    else:
+        pass
+    return render(request, 'contact.html', {'username':username})
+
 
 def register(request):
 
