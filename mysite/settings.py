@@ -143,3 +143,11 @@ logging.basicConfig(
 level = logging.DEBUG,
 format ='%(asctime)s %(levelname)s %(message)s',
 )
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.qq.com'
+EMAIL_PORT = 465
+EMAIL_HOST_USER='554824553@qq.com'
+EMAIL_HOST_PASSWORD='XXXXX'
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'Reading<554824553@qq.com>'

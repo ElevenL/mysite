@@ -4,6 +4,7 @@ import logging
 from django.shortcuts import render, render_to_response
 from django import forms
 import pdb
+from django.core.mail import send_mail
 from django.http import StreamingHttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
@@ -197,25 +198,12 @@ def uploadfile(request):
 def contact(request):
     username = request.user.username
     if request.method == 'POST':
-        bif = BookInfoForm(request.POST, request.FILES)
-        if bif.is_valid():
-            logging.debug(username)
-            nouwuser = User.objects.get(username=username)
-            nouwuser.userprofile.score = nouwuser.userprofile.score + 1
-            bookinfo = BookInfo(
-                name = bif.cleaned_data['name'],
-                author = bif.cleaned_data['author'],
-                # imgurl = bif.cleaned_data['imgurl'],
-                score = int(bif.cleaned_data['score']),
-                file = bif.cleaned_data['file'],
-                path = '/download/' + bif.cleaned_data['file'].name
-            )
-            if bif.cleaned_data['imgurl'] != '':
-                bookinfo.imgurl = bif.cleaned_data['imgurl']
-            logging.debug(bif.cleaned_data['imgurl'])
-            bookinfo.save()
-            nouwuser.save()
-            return HttpResponseRedirect('/')
+        email = request.POST['email']
+        content = request.POST['content']
+        logging.debug(email)
+        logging.debug(content)
+        send_mail('From Reading contact: %s' % email, content, '554824553@qq.com', ['lhq2818@163.com'], fail_silently=False)
+        return HttpResponseRedirect('/')
     else:
         pass
     return render(request, 'contact.html', {'username':username})
