@@ -202,7 +202,7 @@ def contact(request):
         content = request.POST['content']
         logging.debug(email)
         logging.debug(content)
-        send_mail('From Reading contact: %s' % email, content, '554824553@qq.com', ['lhq2818@163.com'], fail_silently=False)
+        send_mail('From Reading contact', 'user:%s\r\nmail:%s\r\n%s' % (username, email, content), '554824553@qq.com', ['lhq2818@163.com'], fail_silently=False)
         return HttpResponseRedirect('/')
     else:
         pass
