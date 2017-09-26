@@ -236,7 +236,7 @@ def task(request):
                 path='/'
 
             )
-            if len(tf.cleaned_data['imgurl']) != '':
+            if tf.cleaned_data['imgurl'] != '':
                 bookinfo.imgurl = tf.cleaned_data['imgurl']
             taskrecord = TaskRecode(
                 askuser = username,
