@@ -197,6 +197,12 @@ def uploadfile(request):
                     bookInfo.path = '/download/' + bookInfo.file.name
                     bookInfo.save()
                     nouwuser.save()
+                    ur = UploadRecord(
+                        username=username,
+                        bookname=bookInfo.name,
+                        author=bookInfo.author,
+                    )
+                    ur.save()
                     break
         return HttpResponseRedirect('/')
     else:
