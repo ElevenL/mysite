@@ -1,65 +1,118 @@
+
+<!-- index.html -->
 <!DOCTYPE html>
 <html>
 <head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Bootstrap 实例 - 默认的导航栏</title>
-   <link href="../static/css/bootstrap.min.css" rel="stylesheet">
-   <link href="../static/css/mystyle.css" rel="stylesheet">
-   <script src="../static/scripts/jquery.min.js"></script>
-   <script src="../static/js/bootstrap.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reading</title>
+
+    <link href="../static/reading/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../static/reading/css/mystyle.css" rel="stylesheet">
+    <script src="../static/reading/scripts/jquery-3.2.1.min.js"></script>
+    <script src="../static/reading/js/bootstrap.min.js"></script>
 </head>
 <body>
 <!--导航栏-->
 <nav class="navbar navbar-inverse" role="navigation">
    <div class="navbar-header">
-      <a class="navbar-brand">阅钉Reading</a>
+      <a class="navbar-brand" href="/">阅钉Reading</a>
    </div>
    <div>
-      <ul class="nav navbar-nav pull-right">
+      <ul class="nav navbar-nav">
          <li class="active"><a href="#">书库</a></li>
-         <li><a href="#">上传</a></li>
-         <li><a href="#">个人中心</a></li>
+         <li><a href="/upload">上传</a></li>
+         <li><a href="/user">个人中心</a></li>
       </ul>
    </div>
 </nav>
 
 <div id="container" class='container'>
    <div class="row">
-      <div class="span8 left">
-         <form action class="form form-horizontal" role="form" method="post">
+       <div class="span6 left">
+         <form action enctype="multipart/form-data" class="form form-horizontal" role="form" method="post">{% csrf_token %}
             <div class="form-group">
-               <label for="inputUserName" class="col-sm-2 control-label">用户名：</label>
+               <label for="inputName" class="col-sm-2 control-label">书名：</label>
                   <div class="col-sm-4">
-                     <input type="username" class="form-control" required id="inputUserName" placeholder="仅允许小写字母，数字和短横, 4~20个字符.">
+                     <input type="text" name="name" class="form-control" id="inputName" required>
                   </div>
             </div>
             <div class="form-group">
-               <label for="inputeMail" class="col-sm-2 control-label">邮箱：</label>
+               <label for="inputauthor" class="col-sm-2 control-label">作者：</label>
                   <div class="col-sm-4">
-                     <input type="email" class="form-control" required id="inputeMail">
+                     <input type="text" name="author" class="form-control" id="inputauthor" required>
+                  </div>
+            </div>
+             <div class="form-group">
+               <label for="inputimgurl" class="col-sm-2 control-label">图片链接：</label>
+                  <div class="col-sm-4">
+                     <input type="text" name="imgurl" class="form-control" id="inputimgurl">
+                     <span class="helptext">如果忽略，将使用默认图片</span>
                   </div>
             </div>
             <div class="form-group">
-               <label for="inputPassword1" class="col-sm-2 control-label">密码：</label>
+               <label for="inputscore" class="col-sm-2 control-label">评分：</label>
                   <div class="col-sm-4">
-                     <input type="password" name="password1" class="form-control" required id="inputPassword1">
+                     <input type="text" name="score" class="form-control" id="inputscore" placeholder="请输入0~10之间的整数." required>
                   </div>
             </div>
-            <div class="form-group">
-               <label for="inputPassword2" class="col-sm-2 control-label">确认密码：</label>
+             <div class="form-group">
+               <label for="inputscore" class="col-sm-2 control-label">格式：</label>
                   <div class="col-sm-4">
-                     <input type="password" name="password2" class="form-control" required id="inputPassword2">
+                     <input type="text" name="score" class="form-control" id="inputscore" placeholder="请输入0~10之间的整数." required>
                   </div>
             </div>
-            <div class="form-action">
-               <div class="col-sm-4" style="float:none;display:block;margin-left:auto;margin-right:auto;">
-                  <button type="submit" class="btn btn-primary">注册</button>
+            <div class="form-action form-group">
+               <div class="col-sm-2" style="float:none;display:block;margin-left:auto;margin-right:auto;">
+                  <button type="submit" class="btn btn-primary">保存</button>
                </div>
             </div>
          </form>
+
+
+
+
+       <hr>
+<table class="table table-striped">
+  <!--<caption>求书任务</caption>-->
+  <thead>
+    <tr>
+        <th>求书用户</th>
+        <th>书名</th>
+        <th>作者</th>
+        <th>格式</th>
+        <th>状态</th>
+        <th>送书用户</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Tanmay</td>
+      <td>Bangalore</td>
+      <td>560001</td>
+        <td>Tanmay</td>
+      <td>Bangalore</td>
+      <td>560001</td>
+    </tr>
+    <tr>
+      <td>Sachin</td>
+      <td>Mumbai</td>
+      <td>400003</td>
+        <td>Tanmay</td>
+      <td>Bangalore</td>
+      <td>560001</td>
+    </tr>
+    <tr>
+      <td>Uma</td>
+      <td>Pune</td>
+      <td>411027</td>
+        <td>Tanmay</td>
+      <td>Bangalore</td>
+      <td>560001</td>
+    </tr>
+  </tbody>
+</table>
       </div>
-   </div>
 </div>
 
 </body>
