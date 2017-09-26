@@ -121,7 +121,7 @@ def download(request):
     file_path = ('/root/book/upload/' + file_name.decode('utf-8'))
     path = ('/download/' + file_name.decode('utf-8'))
     username = request.user.username
-    bookinfo = BookInfo.objects.get(path = path)
+    bookinfo = BookInfo.objects.get(path = path)[0]
     dr = DownloadRecord(
         username=username,
         bookname=bookinfo.name,
