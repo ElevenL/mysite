@@ -117,10 +117,14 @@ def download(request):
     :return:
     '''
     # do something...
+    username = request.user.username
+    nouwuser = User.objects.get(username=username)
+    nouwuser.userprofile.score = nouwuser.userprofile.score - 1
+    if nouwuser.userprofile.score < 0:
+        return HttpResponseRedirect('/')
     file_name = urllib.unquote(str(request.get_full_path().split('/')[-1]))
     file_path = ('/root/book/upload/' + file_name.decode('utf-8'))
     path = ('/download/' + file_name.decode('utf-8'))
-    username = request.user.username
     bookinfo = BookInfo.objects.filter(path=path)[0]
     dr = DownloadRecord(
         username=username,
@@ -129,8 +133,6 @@ def download(request):
         filename=bookinfo.file.name
     )
     logging.debug(username)
-    nouwuser = User.objects.get(username = username)
-    nouwuser.userprofile.score = nouwuser.userprofile.score - 1
     def file_iterator(file_name, chunk_size=512):
         with open(file_name) as f:
             while True:
@@ -152,6 +154,9 @@ def upload(request):
     if request.method == 'POST':
         bif = BookInfoForm(request.POST, request.FILES)
         if bif.is_valid():
+            filterresult = BookInfo.objects.filter(username=bif.cleaned_data['name'],author=bif.cleaned_data['author'])
+            if len(filterresult) > 0:
+                return render(request, 'upload.html', {'errors':'已经存在该书籍'})
             username = request.user.username
             logging.debug(username)
             nouwuser = User.objects.get(username=username)

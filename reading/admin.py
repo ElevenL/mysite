@@ -13,12 +13,12 @@ class BookInfoAdmin(admin.ModelAdmin):
     search_fields = ('name', 'author')
 
 class DownloadRecordAdmin(admin.ModelAdmin):
-    list_display = ('username', 'bookname', 'author', 'downtime')
-    search_fields = ('username', 'bookname', 'author', 'downtime')
+    list_display = ('bookname', 'author', 'downtime', 'username')
+    search_fields = ('bookname', 'author', 'downtime', 'username')
 
 class UploadRecordAdmin(admin.ModelAdmin):
-    list_display = ('username', 'bookname', 'author', 'downtime')
-    search_fields = ('username', 'bookname', 'author', 'downtime')
+    list_display = ('bookname', 'author', 'downtime', 'username')
+    search_fields = ('bookname', 'author', 'downtime', 'username')
 
 class TaskRecodeAdmin(admin.ModelAdmin):
     list_display = ('bookname', 'author', 'asktime')
