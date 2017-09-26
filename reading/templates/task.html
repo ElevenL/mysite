@@ -9,8 +9,8 @@
    <div>
       <ul class="nav navbar-nav">
           <li><a href="/">书库</a></li>
-          <li class="active"><a href="/upload">上传</a></li>
-          <li><a href="/task">求书专区</a></li>
+          <li><a href="/upload">上传</a></li>
+          <li class="active"><a href="/task">求书专区</a></li>
           <li><a href="/contact">联系站长</a></li>
           <li><a href="/user">个人中心</a></li>
       </ul>
@@ -18,10 +18,9 @@
 </nav>
 
 
-
 <div id="container" class='container'>
    <div class="row">
-      <div class="span6 left">
+       <div class="span6 left">
          <form action enctype="multipart/form-data" class="form form-horizontal" role="form" method="post">{% csrf_token %}
             <div class="form-group">
                <label for="inputName" class="col-sm-2 control-label">书名：</label>
@@ -48,18 +47,63 @@
                      <input type="text" name="score" class="form-control" id="inputscore" placeholder="请输入0~10之间的整数." required>
                   </div>
             </div>
-            <div class="form-group">
-               <label class="col-sm-2 control-label" for="inputfile">文件输入：</label>
-               <input type="file" name="file" id="inputfile" required>
+             <div class="form-group">
+               <label for="inputformat" class="col-sm-2 control-label">格式：</label>
+                  <div class="col-sm-4">
+                     <input type="text" name="format" class="form-control" id="inputformat" placeholder="请输入0~10之间的整数." required>
+                  </div>
             </div>
             <div class="form-action form-group">
                <div class="col-sm-2" style="float:none;display:block;margin-left:auto;margin-right:auto;">
-                  <button type="submit" class="btn btn-primary">保存</button>
+                  <button type="submit" class="btn btn-primary">发布</button>
                </div>
             </div>
          </form>
+
+
+
+
+       <hr>
+<table class="table table-striped">
+  <!--<caption>求书任务</caption>-->
+  <thead>
+    <tr>
+        <th>求书用户</th>
+        <th>书名</th>
+        <th>作者</th>
+        <th>格式</th>
+        <th>状态</th>
+        <th>送书用户</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Tanmay</td>
+      <td>Bangalore</td>
+      <td>560001</td>
+        <td>Tanmay</td>
+      <td><button href="#" role="button" class="btn btn-primary btn-small">送书</button></td>
+      <td>560001</td>
+    </tr>
+    <tr>
+      <td>Sachin</td>
+      <td>Mumbai</td>
+      <td>400003</td>
+        <td>Tanmay</td>
+      <td><button href="#" role="button" class="btn btn-primary btn-small">送书</button></td>
+      <td>560001</td>
+    </tr>
+    <tr>
+      <td>Uma</td>
+      <td>Pune</td>
+      <td>411027</td>
+        <td>Tanmay</td>
+      <td><button href="#" role="button" class="btn btn-small btn-primary">送书</button></td>
+      <td>560001</td>
+    </tr>
+  </tbody>
+</table>
       </div>
-   </div>
 </div>
 
 {% endblock %}
