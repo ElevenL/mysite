@@ -20,6 +20,10 @@ class UploadRecordAdmin(admin.ModelAdmin):
     list_display = ('username', 'bookname', 'author', 'downtime')
     search_fields = ('username', 'bookname', 'author', 'downtime')
 
+class TaskRecodeAdmin(admin.ModelAdmin):
+    list_display = ('bookname', 'author', 'asktime')
+    search_fields = ('bookname', 'author', 'asktime')
+
 class ProfileInline(admin.StackedInline):
     model = UserProfile
     verbose_name = 'profile'
@@ -30,5 +34,6 @@ class UserAdmin(admin.ModelAdmin):
 admin.site.register(BookInfo, BookInfoAdmin)
 admin.site.register(DownloadRecord, DownloadRecordAdmin)
 admin.site.register(UploadRecord, UploadRecordAdmin)
+admin.site.register(TaskRecode, TaskRecodeAdmin)
 admin.site.unregister(User) # User是已经注册过的，所以首先需要解绑注册
 admin.site.register(User, UserAdmin)
