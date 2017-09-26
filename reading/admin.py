@@ -12,6 +12,10 @@ class BookInfoAdmin(admin.ModelAdmin):
     list_display = ('name', 'author')
     search_fields = ('name', 'author')
 
+class DownloadRecordAdmin(admin.ModelAdmin):
+    list_display = ('username', 'bookname', 'author', 'downtime')
+    search_fields = ('username', 'bookname', 'author', 'downtime')
+
 class ProfileInline(admin.StackedInline):
     model = UserProfile
     verbose_name = 'profile'
@@ -20,5 +24,6 @@ class UserAdmin(admin.ModelAdmin):
     inlines = (ProfileInline,)
 
 admin.site.register(BookInfo, BookInfoAdmin)
+admin.site.register(DownloadRecord, DownloadRecordAdmin)
 admin.site.unregister(User) # User是已经注册过的，所以首先需要解绑注册
 admin.site.register(User, UserAdmin)
