@@ -196,7 +196,7 @@ def uploadfile(request):
 
 @login_required
 def task(request):
-    pass
+    return render(request, 'task.html')
 
 @login_required
 def contact(request):
