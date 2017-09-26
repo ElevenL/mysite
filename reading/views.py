@@ -221,6 +221,7 @@ def uploadfile(request):
 def task(request):
     if request.method == 'POST':
         tf = TaskForm(request.POST)
+        logging.debug(tf)
         if tf.is_valid():
             username = request.user.username
             nouwuser = User.objects.get(username=username)
