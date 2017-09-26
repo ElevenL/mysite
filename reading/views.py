@@ -168,6 +168,12 @@ def upload(request):
             logging.debug(bif.cleaned_data['imgurl'])
             bookinfo.save()
             nouwuser.save()
+            ur = UploadRecord(
+                username=username,
+                bookname=bookinfo.name,
+                author=bookinfo.author,
+            )
+            ur.save()
             return HttpResponseRedirect('/')
     else:
         pass
