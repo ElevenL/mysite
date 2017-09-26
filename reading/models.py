@@ -44,7 +44,13 @@ class UploadRecord(models.Model):
     downtime = models.DateTimeField(default = timezone.now)
 
 class TaskRecode(models.Model):
-    pass
+    askuser = models.CharField(max_length=50)
+    bookname = models.CharField(max_length=150)
+    imgurl = models.CharField(max_length=2048, blank=True, default='http://readfree.me/static/img/kindle-boy.png')
+    score = models.IntegerField()
+    format = models.CharField(max_length=50, default='any')
+    status = models.IntegerField(default=0)
+    solutionuser = models.CharField(max_length=50, blank=True)
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE) # 关联自带的User结构
