@@ -119,7 +119,14 @@ def download(request):
     # do something...
     file_name = urllib.unquote(str(request.get_full_path().split('/')[-1]))
     file_path = ('/root/book/upload/' + file_name.decode('utf-8'))
+    path = ('/download/' + file_name.decode('utf-8'))
     username = request.user.username
+    bookinfo = BookInfo.objects.get(path = path)
+    dr = DownloadRecord(
+        username=username,
+        bookname=bookinfo.name,
+        author=bookinfo.author,
+    )
     logging.debug(username)
     nouwuser = User.objects.get(username = username)
     nouwuser.userprofile.score = nouwuser.userprofile.score - 1
@@ -135,6 +142,7 @@ def download(request):
     response = StreamingHttpResponse(file_iterator(file_path))
     response['Content-Type'] = 'application/octet-stream'
     response['Content-Disposition'] = 'attachment;filename="{0}"'.format(file_name.decode('utf-8'))
+    dr.save()
     nouwuser.save()
     return response
 
