@@ -73,15 +73,8 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Tanmay</td>
-                  <td>Bangalore</td>
-                  <td>560001</td>
-                    <td>Tanmay</td>
-                  <td><button href="#" role="button" class="btn btn-primary btn-small">送书</button></td>
-                  <td>560001</td>
-                </tr>
                 {% for task in tasks %}
+                <tr>
                 <td>{{task.askuser}}</td>
                 <td>{{task.bookname}}</td>
                 <td>{{task.author}}</td>
@@ -92,6 +85,7 @@
                         <td>完成</td>
                     {% endif %}
                 <td>{{task.solutionuser}}</td>
+                </tr>
                 {% endfor %}
               </tbody>
             </table>
