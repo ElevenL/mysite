@@ -32,4 +32,5 @@ urlpatterns = [
     url(r'^uploadfile/', views.uploadfile),
     url(r'^upload/', views.upload),
     url(r'^contact/', views.contact),
+    url(r'^task/', views.task),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

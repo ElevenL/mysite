@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django import forms
+import django.utils.timezone as timezone
 from django.contrib.auth.models import User
 import os
 from django.db.models.signals import post_save
@@ -29,6 +30,21 @@ class BookInfoForm(forms.ModelForm):
     class Meta:
         model = BookInfo
         exclude = ('path',)
+
+class DownloadRecord(models.Model):
+    username = models.CharField(max_length=50)
+    bookname = models.CharField(max_length=150)
+    author = models.CharField(max_length=150)
+    downtime = models.DateTimeField(default = timezone.now)
+
+class UploadRecord(models.Model):
+    username = models.CharField(max_length=50)
+    bookname = models.CharField(max_length=150)
+    author = models.CharField(max_length=150)
+    downtime = models.DateTimeField(default = timezone.now)
+
+class TaskRecode(models.Model):
+    pass
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE) # 关联自带的User结构

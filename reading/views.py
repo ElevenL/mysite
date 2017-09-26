@@ -195,6 +195,10 @@ def uploadfile(request):
         return render(request, 'uploadfile.html', {'book':book})
 
 @login_required
+def task(request):
+    pass
+
+@login_required
 def contact(request):
     username = request.user.username
     if request.method == 'POST':
