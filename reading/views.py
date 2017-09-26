@@ -229,20 +229,26 @@ def uploadfile(request):
 def task(request):
     if request.method == 'POST':
         tf = TaskForm(request.POST)
+        username = request.user.username
+        nouwuser = User.objects.get(username=username)
+        nouwuser.userprofile.score = nouwuser.userprofile.score - 2
+        if nouwuser.userprofile.score < 0:
+            tasks = TaskRecode.objects.filter(status=0)
+            return render(request, 'task.html', {'tasks': tasks, 'errors':'积分不足'})
         logging.debug(tf)
         if tf.is_valid():
-            username = request.user.username
-            nouwuser = User.objects.get(username=username)
-            nouwuser.userprofile.score = nouwuser.userprofile.score - 2
-            bookinfo = BookInfo(
-                name=tf.cleaned_data['bookname'],
-                author=tf.cleaned_data['author'],
-                score=int(tf.cleaned_data['score']),
-                path='/'
+            filterresult = BookInfo.objects.filter(name=tf.cleaned_data['bookname'], author=tf.cleaned_data['author'])
+            if len(filterresult) == 0:
+                bookinfo = BookInfo(
+                    name=tf.cleaned_data['bookname'],
+                    author=tf.cleaned_data['author'],
+                    score=int(tf.cleaned_data['score']),
+                    path='/'
 
-            )
-            if tf.cleaned_data['imgurl'] != '':
-                bookinfo.imgurl = tf.cleaned_data['imgurl']
+                )
+                if tf.cleaned_data['imgurl'] != '':
+                    bookinfo.imgurl = tf.cleaned_data['imgurl']
+                bookinfo.save()
             taskrecord = TaskRecode(
                 askuser = username,
                 bookname = tf.cleaned_data['bookname'],
@@ -250,13 +256,12 @@ def task(request):
                 score = int(tf.cleaned_data['score']),
                 format = tf.cleaned_data['format'],
             )
-            bookinfo.save()
             taskrecord.save()
             nouwuser.save()
     else:
         pass
     tasks = TaskRecode.objects.filter(status=0)
-    return render(request, 'task.html', {'tasks': tasks})
+    return render(request, 'task.html', {'tasks': tasks, 'errors':None})
 
 @login_required
 def contact(request):

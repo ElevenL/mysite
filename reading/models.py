@@ -54,6 +54,9 @@ class TaskRecode(models.Model):
     format = models.CharField(max_length=50, default='any')
     status = models.IntegerField(default=0)
     solutionuser = models.CharField(max_length=50, blank=True)
+    
+    class Meta:
+        ordering = ('-asktime',)
 
 class TaskForm(forms.Form):
     bookname = forms.CharField(max_length=150)
