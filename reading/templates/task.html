@@ -59,51 +59,44 @@
                </div>
             </div>
          </form>
-
-
-
-
-       <hr>
-<table class="table table-striped">
-  <!--<caption>求书任务</caption>-->
-  <thead>
-    <tr>
-        <th>求书用户</th>
-        <th>书名</th>
-        <th>作者</th>
-        <th>格式</th>
-        <th>状态</th>
-        <th>送书用户</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Tanmay</td>
-      <td>Bangalore</td>
-      <td>560001</td>
-        <td>Tanmay</td>
-      <td><button href="#" role="button" class="btn btn-primary btn-small">送书</button></td>
-      <td>560001</td>
-    </tr>
-    <tr>
-      <td>Sachin</td>
-      <td>Mumbai</td>
-      <td>400003</td>
-        <td>Tanmay</td>
-      <td><button href="#" role="button" class="btn btn-primary btn-small">送书</button></td>
-      <td>560001</td>
-    </tr>
-    <tr>
-      <td>Uma</td>
-      <td>Pune</td>
-      <td>411027</td>
-        <td>Tanmay</td>
-      <td><button href="#" role="button" class="btn btn-small btn-primary">送书</button></td>
-      <td>560001</td>
-    </tr>
-  </tbody>
-</table>
-      </div>
+           <hr>
+            <table class="table table-striped">
+              <!--<caption>求书任务</caption>-->
+              <thead>
+                <tr>
+                    <th>求书用户</th>
+                    <th>书名</th>
+                    <th>作者</th>
+                    <th>格式</th>
+                    <th>状态</th>
+                    <th>送书用户</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Tanmay</td>
+                  <td>Bangalore</td>
+                  <td>560001</td>
+                    <td>Tanmay</td>
+                  <td><button href="#" role="button" class="btn btn-primary btn-small">送书</button></td>
+                  <td>560001</td>
+                </tr>
+                {% for task in tasks %}
+                <td>{{task.askuser}}</td>
+                <td>{{task.bookname}}</td>
+                <td>{{task.author}}</td>
+                <td>{{task.format}}</td>
+                    {% if task.status == 0 %}
+                        <td><button href="/uploadfile/{{ task.booknam }}" role="button" class="btn btn-primary btn-small">送书</button></td>
+                    {% else %}
+                        <td>完成</td>
+                    {% endif %}
+                <td>{{task.solutionuser}}</td>
+                {% endfor %}
+              </tbody>
+            </table>
+       </div>
+   </div>
 </div>
 
 {% endblock %}

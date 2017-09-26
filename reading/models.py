@@ -48,11 +48,20 @@ class UploadRecord(models.Model):
 class TaskRecode(models.Model):
     askuser = models.CharField(max_length=50)
     bookname = models.CharField(max_length=150)
-    imgurl = models.CharField(max_length=2048, blank=True, default='http://readfree.me/static/img/kindle-boy.png')
+    author = models.CharField(max_length=150)
+    asktime = models.DateTimeField(default=timezone.now)
     score = models.IntegerField()
     format = models.CharField(max_length=50, default='any')
     status = models.IntegerField(default=0)
     solutionuser = models.CharField(max_length=50, blank=True)
+
+class TaskForm(forms.Form):
+    bookname = forms.CharField(max_length=150)
+    author = forms.CharField(max_length=150)
+    imgurl = forms.CharField(max_length=2048, blank=True)
+    score = forms.IntegerField()
+    format = forms.CharField(max_length=50, default='any')
+
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE) # 关联自带的User结构

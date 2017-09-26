@@ -219,7 +219,36 @@ def uploadfile(request):
 
 @login_required
 def task(request):
-    return render(request, 'task.html')
+    if request.method == 'POST':
+        tf = TaskForm(request.POST)
+        if tf.is_valid():
+            username = request.user.username
+            nouwuser = User.objects.get(username=username)
+            nouwuser.userprofile.score = nouwuser.userprofile.score - 2
+            bookinfo = BookInfo(
+                name=tf.cleaned_data['name'],
+                author=tf.cleaned_data['author'],
+                score=int(tf.cleaned_data['score']),
+                path='/'
+
+            )
+            if len(tf.cleaned_data['imgurl']) != '':
+                bookinfo.imgurl = tf.cleaned_data['imgurl']
+            bookinfo.save()
+            taskrecord = TaskRecode(
+                askuser = username,
+                bookname = tf.cleaned_data['name'],
+                author = tf.cleaned_data['author'],
+                score = int(tf.cleaned_data['score']),
+                format = tf.cleaned_data['format'],
+            )
+            bookinfo.save()
+            taskrecord.save()
+            nouwuser.save()
+    else:
+        pass
+    tasks = TaskRecode.objects.filter(status=0)
+    return render(request, 'task.html', {'tasks': tasks})
 
 @login_required
 def contact(request):
