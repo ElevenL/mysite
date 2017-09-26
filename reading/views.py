@@ -162,11 +162,13 @@ def upload(request):
                 # imgurl = bif.cleaned_data['imgurl'],
                 score = int(bif.cleaned_data['score']),
                 file = bif.cleaned_data['file'],
-                path = '/download/' + bif.cleaned_data['file'].name
+                path = '/'
             )
             if bif.cleaned_data['imgurl'] != '':
                 bookinfo.imgurl = bif.cleaned_data['imgurl']
             logging.debug(bif.cleaned_data['imgurl'])
+            bookinfo.save()
+            bookinfo.path = ('/download/' + bookinfo.file.name.split('/')[-1])
             bookinfo.save()
             nouwuser.save()
             ur = UploadRecord(
@@ -196,7 +198,8 @@ def uploadfile(request):
             for bookInfo in bookInfos:
                 if bookInfo.path == '/':
                     bookInfo.file = uploadfile
-                    bookInfo.path = '/download/' + bookInfo.file.name
+                    bookInfo.save()
+                    bookInfo.path = ('/download/' + bookInfo.file.name.split('/')[-1])
                     bookInfo.save()
                     nouwuser.save()
                     ur = UploadRecord(
