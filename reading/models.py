@@ -58,9 +58,9 @@ class TaskRecode(models.Model):
 class TaskForm(forms.Form):
     bookname = forms.CharField(max_length=150)
     author = forms.CharField(max_length=150)
-    imgurl = forms.CharField(max_length=2048)
+    imgurl = forms.CharField(max_length=2048,required=False)
     score = forms.IntegerField()
-    format = forms.CharField(max_length=50, default='any')
+    format = forms.CharField(max_length=50)
 
 
 class UserProfile(models.Model):
