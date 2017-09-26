@@ -227,7 +227,7 @@ def task(request):
             nouwuser = User.objects.get(username=username)
             nouwuser.userprofile.score = nouwuser.userprofile.score - 2
             bookinfo = BookInfo(
-                name=tf.cleaned_data['name'],
+                name=tf.cleaned_data['bookname'],
                 author=tf.cleaned_data['author'],
                 score=int(tf.cleaned_data['score']),
                 path='/'
@@ -238,7 +238,7 @@ def task(request):
             bookinfo.save()
             taskrecord = TaskRecode(
                 askuser = username,
-                bookname = tf.cleaned_data['name'],
+                bookname = tf.cleaned_data['bookname'],
                 author = tf.cleaned_data['author'],
                 score = int(tf.cleaned_data['score']),
                 format = tf.cleaned_data['format'],
