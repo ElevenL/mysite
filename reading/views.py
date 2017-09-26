@@ -235,7 +235,6 @@ def task(request):
             )
             if len(tf.cleaned_data['imgurl']) != '':
                 bookinfo.imgurl = tf.cleaned_data['imgurl']
-            bookinfo.save()
             taskrecord = TaskRecode(
                 askuser = username,
                 bookname = tf.cleaned_data['bookname'],
