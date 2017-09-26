@@ -126,6 +126,7 @@ def download(request):
         username=username,
         bookname=bookinfo.name,
         author=bookinfo.author,
+        filename=bookinfo.file.name
     )
     logging.debug(username)
     nouwuser = User.objects.get(username = username)
@@ -172,6 +173,7 @@ def upload(request):
                 username=username,
                 bookname=bookinfo.name,
                 author=bookinfo.author,
+                filename=bookinfo.file.name
             )
             ur.save()
             return HttpResponseRedirect('/')
@@ -201,6 +203,7 @@ def uploadfile(request):
                         username=username,
                         bookname=bookInfo.name,
                         author=bookInfo.author,
+                        filename=bookInfo.file.name
                     )
                     ur.save()
                     break

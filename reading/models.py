@@ -36,12 +36,14 @@ class DownloadRecord(models.Model):
     bookname = models.CharField(max_length=150)
     author = models.CharField(max_length=150)
     downtime = models.DateTimeField(default = timezone.now)
+    filename = models.CharField(max_length=150, blank=True, default='')
 
 class UploadRecord(models.Model):
     username = models.CharField(max_length=50)
     bookname = models.CharField(max_length=150)
     author = models.CharField(max_length=150)
     downtime = models.DateTimeField(default = timezone.now)
+    filename = models.CharField(max_length=150, blank=True, default='')
 
 class TaskRecode(models.Model):
     askuser = models.CharField(max_length=50)
