@@ -154,7 +154,7 @@ def upload(request):
     if request.method == 'POST':
         bif = BookInfoForm(request.POST, request.FILES)
         if bif.is_valid():
-            filterresult = BookInfo.objects.filter(username=bif.cleaned_data['name'],author=bif.cleaned_data['author'])
+            filterresult = BookInfo.objects.filter(name=bif.cleaned_data['name'],author=bif.cleaned_data['author'])
             if len(filterresult) > 0:
                 return render(request, 'upload.html', {'errors':'已经存在该书籍'})
             username = request.user.username
