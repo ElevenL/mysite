@@ -121,7 +121,12 @@ $(function(){
                           message: '图片链接长度必须在10到2048之间'
                     }
                 }
-            }   //最后一个没有逗号
+            },
+            content: {
+                validators: {
+                    notEmpty: {message: '请输入内容'}
+                }
+            }
         }
     })
 });
