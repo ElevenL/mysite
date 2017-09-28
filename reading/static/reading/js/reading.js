@@ -115,7 +115,6 @@ $(function(){
             },
             imgurl: {
                 validators: {
-                    notEmpty: {message: '请输图片链接'},
                     stringLength: {    //长度限制
                           min: 10,
                           max: 2048,
