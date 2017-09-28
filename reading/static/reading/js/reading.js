@@ -93,6 +93,16 @@ $(function(){
                     }
                 }
             },
+            bookname: {
+                validators: {
+                    notEmpty: {message: '请输入书名'},
+                    stringLength: {    //长度限制
+                          min: 1,
+                          max: 150,
+                          message: '书名长度必须在1到150之间'
+                    }
+                }
+            },
             author: {
                 validators: {
                     notEmpty: {message: '请输入作者'},
