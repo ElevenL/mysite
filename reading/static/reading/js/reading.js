@@ -26,17 +26,6 @@ $(function(){
                     regexp: {//匹配规则
                           regexp: /^[a-zA-Z0-9_\\u4e00-\\u9fa5]+$/,  //正则表达式
                           message:'用户名仅支持汉字、字母、数字、下划线的组合'
-                    },
-                    remote: { //ajax校验，获得一个json数据（{'valid': true or false}）
-                          url: 'user.php',                  //验证地址
-                          message: '用户已存在',   //提示信息
-                          type: 'POST',                   //请求方式
-                          data: function(validator){  //自定义提交数据，默认为当前input name值
-                            return {
-                                act: 'is_registered',
-                                username: $("input[name='username']").val()
-                            }
-                        }
                     }
                 }
             },
