@@ -13,30 +13,30 @@
    </div>
 </nav>
 
-
 <div id="container" class='container'>
-   <div class="row">
-      <div class="span8 left">
-         <form action  class="form form-horizontal" role="form" method="post">{% csrf_token %}
-            <div class="form-group">
-               <label for="inputUserName" class="col-sm-2 control-label">用户名：</label>
-                  <div class="col-sm-4">
-                     <input type="text" name="username" class="form-control" required id="inputUserName" placeholder="仅允许小写字母，数字和短横, 4~20个字符.">
-                  </div>
-            </div>
-            <div class="form-group">
-               <label for="inputPassword" class="col-sm-2 control-label">密码：</label>
-                  <div class="col-sm-4">
-                     <input type="password" name="password" class="form-control" required id="inputPassword">
-                  </div>
-            </div>
-            <div class="form-action">
-               <div class="col-sm-2" style="float:none;display:block;margin-left:auto;margin-right:auto;">
-                  <button type="submit" class="btn btn-primary">登录</button>
+   <div class="mycenter">
+       <form action method="post" class="form form-horizontal" role="form">
+           <div class="col-lg-11 text-center text-info">
+           <H2>请登录</H2>
+           </div>
+          <div class="form-group">
+              <div class="input-group">
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                  <input type="text" class="form-control" placeholder="用户名" name="username" />
+              </div>
+          </div>
+           <div class="form-group">
+              <div class="input-group">
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                  <input type="text" class="form-control" placeholder="密码" name="password" />
+              </div>
+          </div>
+           <div class="form-group">
+               <div class="input-group">
+                    <button type="submit" class="btn btn-default">登录</button>
                </div>
-            </div>
-         </form>
-      </div>
+           </div>
+      </form>
    </div>
 </div>
 {% endblock %}

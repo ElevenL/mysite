@@ -43,10 +43,10 @@ body {
 .mycenter mysign{
     width: 440px;
 }
-.mycenter input,checkbox,button{
+.mycenter checkbox,button{
     margin-top:2%;
-    margin-left: 10%;
-    margin-right: 10%;
+    margin-left: 300%;
+
 }
 .mycheckbox{
     margin-top:10px;
