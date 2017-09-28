@@ -54,6 +54,20 @@ $(function(){
                    }
                 }
             },
+            password: {
+                validators: {
+                   notEmpty: {message: '请输入密码'},
+                   stringLength: {    //长度限制
+                          min: 6,
+                          max: 60,
+                          message: '用户名长度必须在6到60之间'
+                    },
+                   different: {  //比较
+                        field: 'username', //需要进行比较的input name值
+                        message: '密码不能与用户名相同'
+                   }
+                }
+            },
             password2: {
                 validators: {
                     notEmpty: {message: '请再次输入密码'},
@@ -69,7 +83,7 @@ $(function(){
                     emailAddress: {message: '请输入正确的邮件地址'}
                 }
             },
-            bookname: {
+            name: {
                 validators: {
                     notEmpty: {message: '请输入书名'},
                     stringLength: {    //长度限制
