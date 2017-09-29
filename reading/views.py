@@ -243,14 +243,11 @@ def uploadfile(request):
 
 @login_required
 def task(request):
+    username = request.user.username
+    nouwuser = User.objects.get(username=username)
+    score = nouwuser.userprofile.score
     if request.method == 'POST':
         tf = TaskForm(request.POST)
-        username = request.user.username
-        nouwuser = User.objects.get(username=username)
-        nouwuser.userprofile.score = nouwuser.userprofile.score - 2
-        if nouwuser.userprofile.score < 0:
-            tasks = TaskRecode.objects.filter(status=0)
-            return render(request, 'task.html', {'tasks': tasks, 'errors':'积分不足'})
         logging.debug(tf)
         if tf.is_valid():
             filterresult = BookInfo.objects.filter(name=tf.cleaned_data['bookname'], author=tf.cleaned_data['author'])
@@ -273,12 +270,8 @@ def task(request):
                 format = tf.cleaned_data['format'],
             )
             taskrecord.save()
-            nouwuser.save()
     else:
         pass
-    username = request.user.username
-    nouwuser = User.objects.get(username=username)
-    score = nouwuser.userprofile.score
     tasks = TaskRecode.objects.filter(status=0)
     return render(request, 'task.html',
                   {'tasks': tasks,
