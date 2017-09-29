@@ -112,7 +112,7 @@ def search(request):
     return render(request, 'search.html',
                   {'books': books,
                    'username': username,
-                   'scor': score,
+                   'score': score,
                    'cur_page': page,
                    'page_list': page_list,
                    'p_page': str(p_page),
@@ -275,7 +275,7 @@ def dotask(request):
                             tr.save()
                             break
                     break
-        return HttpResponseRedirect('/')
+        return HttpResponseRedirect('/task/')
     else:
         bookName = urllib.unquote(str(request.get_full_path().split('/')[-1])).decode('utf-8')
         bookInfo = BookInfo.objects.filter(name=bookName)[0]
@@ -321,7 +321,7 @@ def task(request):
             taskrecord.save()
     else:
         pass
-    tasks = TaskRecode.objects.filter(status=0)
+    tasks = TaskRecode.objects.all()
     return render(request, 'task.html',
                   {'tasks': tasks,
                    'username': username,
