@@ -29,6 +29,8 @@ urlpatterns = [
     url(r'^download/', views.download),
     url(r'^register/', views.register),
     url(r'^login/', views.userlogin),
+    url(r'^logout/', views.userlogout),
+    url(r'^changepassword/', views.changepassword),
     url(r'^uploadfile/', views.uploadfile),
     url(r'^upload/', views.upload),
     url(r'^contact/', views.contact),

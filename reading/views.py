@@ -7,7 +7,7 @@ import pdb
 from django.core.mail import send_mail
 from django.http import StreamingHttpResponse
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from reading.models import *
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.decorators.csrf import csrf_protect
@@ -351,3 +351,30 @@ def userlogin(request):
     else:
         ulf = UserFormLogin()
     return render(request, "login.html")
+
+@login_required
+def userlogout(request):
+    username = request.user.username
+    nouwuser = User.objects.get(username=username)
+    score = nouwuser.userprofile.score
+    errors = None
+    if request.method == "POST":
+        oldpassword = request.POST['password']
+        user = authenticate(username=username, password=oldpassword)
+        if user is not None and user.is_active:
+            newpassword = request.POST['password1']
+            user.set_password(newpassword)
+            user.save()
+            return HttpResponseRedirect('/')
+        else:
+            errors = 'password is wrong!'
+    else:
+        pass
+    return render(request, "changepassword.html", {'username': username, 'score':score, 'errors':errors})
+
+
+
+@login_required
+def userlogout(request):
+    logout(request)
+    return HttpResponseRedirect("/login/")
