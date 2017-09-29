@@ -353,7 +353,7 @@ def userlogin(request):
     return render(request, "login.html")
 
 @login_required
-def userlogout(request):
+def changepassword(request):
     username = request.user.username
     nouwuser = User.objects.get(username=username)
     score = nouwuser.userprofile.score
