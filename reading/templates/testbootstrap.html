@@ -31,30 +31,61 @@
 </nav>
 
 
-<form action="login.php" method="post">
-            <div class="mycenter">
-            <div class="mysign">
-                <div class="col-lg-11 text-center text-info">
-                    <h2>请登录</h2>
-                </div>
-                <div class="col-lg-10">
-                    <input type="text" class="form-control" name="username" placeholder="请输入账户名" required autofocus/>
-                </div>
-                <div class="col-lg-10"></div>
-                <div class="col-lg-10">
-                    <input type="password" class="form-control" name="password" placeholder="请输入密码" required autofocus/>
-                </div>
-                <div class="col-lg-10"></div>
-                <div class="col-lg-10 mycheckbox checkbox">
-                    <input type="checkbox" class="col-lg-1">记住密码</input>
-                </div>
-                <div class="col-lg-10"></div>
-                <div class="col-lg-10">
-                    <button type="button" class="btn btn-success col-lg-12">登录</button>
-                </div>
-            </div>
-        </div>
-        </form>
+<div id="container" class='container'>
+   <div class="mycenter">
+       <form action method="post" class="form form-horizontal" role="form">{% csrf_token %}
+           <div class="col-lg-11 text-center text-info">
+           <H2>上传图书</H2>
+           </div>
+          <div class="form-group">
+              <div class="input-group">
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-book"></i></span>
+                  <input type="text" class="form-control" placeholder="书名" name="name" />
+              </div>
+          </div>
+           <div class="form-group">
+              <div class="input-group">
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                  <input type="text" class="form-control" placeholder="作者" name="author" />
+              </div>
+          </div>
+           <div class="form-group">
+              <div class="input-group">
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-link"></i></span>
+                  <input type="text" class="form-control" placeholder="图片链接" name="imgurl" />
+              </div>
+          </div>
+           <div class="form-group">
+              <div class="input-group">
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-thumbs-up"></i></span>
+                  <select name='score' class="form-control">
+                        <option value="9">9</option>
+                        <option value="8">8</option>
+                        <option value="7">7</option>
+                        <option value="6">6</option>
+                        <option value="5">5</option>
+                        <option value="4">4</option>
+                        <option value="3">3</option>
+                        <option value="2">2</option>
+                        <option value="1">1</option>
+                  </select>
+              </div>
+          </div>
+           <div class="form-group">
+              <div class="input-group">
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-folder-open"></i></span>
+                  <input type="file" name="file" id="inputfile" required>
+              </div>
+          </div>
+           <div class="form-group">
+               <div class="input-group">
+                    <button type="submit" class="btn btn-default">登录</button>
+               </div>
+           </div>
+      </form>
+   </div>
+</div>
+
 
 </body>
 </html>
