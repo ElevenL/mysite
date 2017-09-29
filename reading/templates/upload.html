@@ -21,7 +21,7 @@
 
 <div id="container" class='container'>
    <div class="mycenter">
-       <form action method="post" class="form form-horizontal" role="form">{% csrf_token %}
+       <form action method="post" enctype="multipart/form-data" class="form form-horizontal" role="form">{% csrf_token %}
            <div class="col-lg-11 text-center text-info">
            <H2>上传图书</H2>
            </div>
@@ -67,7 +67,7 @@
           </div>
            <div class="form-group">
                <div class="input-group">
-                    <button type="submit" class="btn btn-default">登录</button>
+                    <button type="submit" class="btn btn-default">上传</button>
                </div>
            </div>
       </form>
