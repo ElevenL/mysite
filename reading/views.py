@@ -74,12 +74,17 @@ def index(request):
     :return:
     '''
     logging.debug(request.user)
+    username = request.user.username
+    nouwuser = User.objects.get(username=username)
+    score = nouwuser.userprofile.score
     page = int(request.GET.get('page', '1'))
     allBookCounts = BookInfo.objects.count()
     start_id, end_id, page_list, p_page, n_page = make_pages(page, allBookCounts)
     books = BookInfo.objects.all()[start_id:end_id]
     return render(request, 'index.html',
                   {'books': books,
+                   'username': username,
+                   'score': score,
                    'cur_page': page,
                    'page_list': page_list,
                    'p_page': str(p_page),
@@ -101,8 +106,13 @@ def search(request):
     allBookCounts = len(search_content)
     start_id, end_id, page_list, p_page, n_page = make_pages(page, allBookCounts)
     books = search_content[start_id:end_id]
+    username = request.user.username
+    nouwuser = User.objects.get(username=username)
+    score = nouwuser.userprofile.score
     return render(request, 'search.html',
                   {'books': books,
+                   'username': username,
+                   'scor': score,
                    'cur_page': page,
                    'page_list': page_list,
                    'p_page': str(p_page),
@@ -185,8 +195,10 @@ def upload(request):
             ur.save()
             return HttpResponseRedirect('/')
     else:
-        pass
-    return render(request, 'upload.html')
+        username = request.user.username
+        nouwuser = User.objects.get(username=username)
+        score = nouwuser.userprofile.score
+    return render(request, 'upload.html', {'username': username, 'score':score})
 
 @login_required
 def uploadfile(request):
@@ -223,7 +235,11 @@ def uploadfile(request):
         book['name'] = bookInfo.name
         book['author'] = bookInfo.author
         book['score'] = bookInfo.score
-        return render(request, 'uploadfile.html', {'book':book})
+
+        username = request.user.username
+        nouwuser = User.objects.get(username=username)
+        score = nouwuser.userprofile.score
+        return render(request, 'uploadfile.html', {'book':book, 'username':username, 'score':score})
 
 @login_required
 def task(request):
@@ -260,12 +276,21 @@ def task(request):
             nouwuser.save()
     else:
         pass
+    username = request.user.username
+    nouwuser = User.objects.get(username=username)
+    score = nouwuser.userprofile.score
     tasks = TaskRecode.objects.filter(status=0)
-    return render(request, 'task.html', {'tasks': tasks, 'errors':None})
+    return render(request, 'task.html',
+                  {'tasks': tasks,
+                   'username': username,
+                   'score':score,
+                   'errors':None})
 
 @login_required
 def contact(request):
     username = request.user.username
+    nouwuser = User.objects.get(username=username)
+    score = nouwuser.userprofile.score
     if request.method == 'POST':
         email = request.POST['email']
         content = request.POST['content']
@@ -275,7 +300,7 @@ def contact(request):
         return HttpResponseRedirect('/')
     else:
         pass
-    return render(request, 'contact.html', {'username':username})
+    return render(request, 'contact.html', {'username':username, 'score':score})
 
 
 def register(request):
