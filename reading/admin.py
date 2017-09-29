@@ -9,7 +9,7 @@ from reading.models import *
 # Register your models here.
 
 class BookInfoAdmin(admin.ModelAdmin):
-    list_display = ('name', 'author', 'imgurl')
+    list_display = ('name', 'author', 'file')
     search_fields = ('name', 'author')
     admin_order_field = 'name'
 
