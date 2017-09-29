@@ -115,6 +115,11 @@ $(function(){
                 validators: {
                     notEmpty: {message: '请输入内容'}
                 }
+            },
+            file: {
+                validators: {
+                    notEmpty: {message: '请输上传图书文件'}
+                }
             }
         }
     })
