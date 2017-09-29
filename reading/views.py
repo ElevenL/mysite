@@ -242,6 +242,55 @@ def uploadfile(request):
         return render(request, 'uploadfile.html', {'book':book, 'username':username, 'score':score})
 
 @login_required
+def dotask(request):
+    if request.method == 'POST':
+        uff = UploadFileForm(request.POST, request.FILES)
+        if uff.is_valid():
+            username = request.user.username
+            logging.debug(username)
+            nouwuser = User.objects.get(username=username)
+            nouwuser.userprofile.score = nouwuser.userprofile.score + 2
+            bookName = urllib.unquote(str(request.get_full_path().split('/')[-1])).decode('utf-8')
+            uploadfile = uff.cleaned_data['file']
+            bookInfos = BookInfo.objects.filter(name=bookName)
+            for bookInfo in bookInfos:
+                if bookInfo.path == '/':
+                    bookInfo.file = uploadfile
+                    bookInfo.save()
+                    bookInfo.path = ('/download/' + bookInfo.file.name.split('/')[-1])
+                    bookInfo.save()
+                    nouwuser.save()
+                    ur = UploadRecord(
+                        username=username,
+                        bookname=bookInfo.name,
+                        author=bookInfo.author,
+                        filename=bookInfo.file.name
+                    )
+                    ur.save()
+                    trs = TaskRecode.objects.filter(bookname=bookInfo.name, author=bookInfo.author)
+                    for tr in trs:
+                        if tr.status == 0:
+                            tr.status =1
+                            tr.solutionuser = username
+                            tr.save()
+                            break
+                    break
+        return HttpResponseRedirect('/')
+    else:
+        bookName = urllib.unquote(str(request.get_full_path().split('/')[-1])).decode('utf-8')
+        bookInfo = BookInfo.objects.filter(name=bookName)[0]
+        book = {}
+        book['name'] = bookInfo.name
+        book['author'] = bookInfo.author
+        book['score'] = bookInfo.score
+
+        username = request.user.username
+        nouwuser = User.objects.get(username=username)
+        score = nouwuser.userprofile.score
+        return render(request, 'uploadfile.html', {'book':book, 'username':username, 'score':score})
+
+
+@login_required
 def task(request):
     username = request.user.username
     nouwuser = User.objects.get(username=username)

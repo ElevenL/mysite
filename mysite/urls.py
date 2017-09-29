@@ -33,6 +33,7 @@ urlpatterns = [
     url(r'^changepassword/', views.changepassword),
     url(r'^uploadfile/', views.uploadfile),
     url(r'^upload/', views.upload),
+    url(r'^dotask/', views.dotask),
     url(r'^contact/', views.contact),
     url(r'^task/', views.task),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
