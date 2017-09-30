@@ -6,6 +6,7 @@ from django import forms
 import pdb
 from django.core.mail import send_mail
 from django.http import StreamingHttpResponse
+from django.db.models import Q
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from reading.models import *
@@ -102,7 +103,7 @@ def search(request):
     if name_kw == 'all':
         return index(request)
     else:
-        search_content = BookInfo.objects.filter(name__icontains=name_kw)
+        search_content = BookInfo.objects.filter(Q(name__icontains=name_kw)|Q(author__icontains=name_kw))
     allBookCounts = len(search_content)
     start_id, end_id, page_list, p_page, n_page = make_pages(page, allBookCounts)
     books = search_content[start_id:end_id]
