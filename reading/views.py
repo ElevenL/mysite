@@ -412,7 +412,6 @@ def changepassword(request):
     username = request.user.username
     nouwuser = User.objects.get(username=username)
     score = nouwuser.userprofile.score
-    errors = None
     if request.method == "POST":
         oldpassword = request.POST['password']
         user = authenticate(username=username, password=oldpassword)
