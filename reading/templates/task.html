@@ -35,7 +35,7 @@
 <div id="container" class='container'>
    <div class="row">
        <div class="span6 left">
-           <a class='btn btn-lg btn-primary' href="/createtask">
+           <a class='btn btn-lg btn-success' href="/createtask">
                <i class="fa fa-download" aria-hidden="true"></i>发布求书任务
            </a>
            <hr>
@@ -60,7 +60,7 @@
                 <td>{{task.format}}</td>
                     {% if task.status == 0 %}
                         <td>
-                            <a class='book-down btn btn-mini btn-primary' href="/dotask/{{ task.bookname }}">
+                            <a class='btn btn-xs btn-primary' href="/dotask/{{ task.bookname }}">
                                 <i class="fa fa-download" aria-hidden="true"></i>上传
                             </a>
                         </td>
