@@ -7,6 +7,7 @@ import pdb
 from django.core.mail import send_mail
 from django.http import StreamingHttpResponse
 from django.db.models import Q
+from datetime import *
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from reading.models import *
@@ -398,6 +399,9 @@ def userlogin(request):
             logging.debug(password)
             logging.debug(user)
             if user is not None:
+                if (user.last_login.date() != datetime.today().date()):
+                    user.userprofile.score = user.userprofile.score + 1
+                    user.save()
                 login(request,user)
                 request.session.set_expiry(12 * 3600)
                 return HttpResponseRedirect('/')
