@@ -387,17 +387,14 @@ def register(request):
     return render(request, 'register.html')
 
 def userlogin(request):
+    errors = ''
     if request.method == "POST":
         ulf = UserFormLogin(request.POST)
         if ulf.is_valid():
             #获取表单信息
-            logging.debug('uf is avlid!!!!!')
             username = ulf.cleaned_data['username']
             password = ulf.cleaned_data['password']
             user = authenticate(username=username, password=password)
-            logging.debug(username)
-            logging.debug(password)
-            logging.debug(user)
             if user is not None:
                 if (user.last_login.date() != datetime.today().date()):
                     user.userprofile.score = user.userprofile.score + 1
@@ -406,10 +403,11 @@ def userlogin(request):
                 request.session.set_expiry(12 * 3600)
                 return HttpResponseRedirect('/')
             else:
-                return render(request, "login.html", {'errors': "用户名密码不正确"})
+                errors = "用户名密码不正确!"
+                return render(request, "login.html", {'errors':errors})
     else:
         ulf = UserFormLogin()
-    return render(request, "login.html")
+    return render(request, "login.html", {'errors':errors})
 
 @login_required
 def changepassword(request):
