@@ -3,6 +3,7 @@
 {% block content %}
 <!--导航栏-->
 <nav class="navbar navbar-inverse" role="navigation">
+    <div class="container">
    <div class="navbar-header">
       <a class="navbar-brand" href="/">阅钉Reading</a>
    </div>
@@ -29,9 +30,11 @@
          <li><a>积分: {{ score }}</a></li>
       </ul>
    </div>
+    </div>
 </nav>
 
     <div class="search-bar">
+        <div class="container">
         <form class="bs-example bs-example-form" role="form" action="/search/" method="get">
             <div class="row">
                 <div class="col-lg-6">
@@ -44,7 +47,10 @@
                 </div>
             </div>
         </form>
+        </div>
     </div>
+
+<div class="container">
     <div class="row book-li">
     {% for book in books %}
         {% if book.path == '/' %}
@@ -90,9 +96,12 @@
         {% endif %}
     {% endfor %}
     </div>
+</div>
+
 
 <!--分页已完成-->
 <nav style="text-align: center">
+    <div class="container">
 <ul class="pagination">
     <li><a href="?page={{ p_page }}">&laquo;</a></li>
     {% for p in page_list %}
@@ -104,5 +113,6 @@
     {% endfor %}
    <li><a href="?page={{ n_page }}">&raquo;</a></li>
 </ul>
+    </div>
 </nav>
 {% endblock %}
