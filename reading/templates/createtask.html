@@ -1,0 +1,96 @@
+<!-- index.html -->
+{% extends "base.html" %}
+{% block content %}
+<!--导航栏-->
+<nav class="navbar navbar-inverse" role="navigation">
+   <div class="navbar-header">
+      <a class="navbar-brand" href="/">阅钉Reading</a>
+   </div>
+   <div>
+      <ul class="nav navbar-nav">
+          <li><a href="/"><span class="glyphicon glyphicon-book"></span> 书库</a></li>
+          <li><a href="/upload"><span class="glyphicon glyphicon-open"></span> 上传</a></li>
+          <li class="active"><a href="/task"><span class="glyphicon glyphicon-tasks"></span> 求书专区</a></li>
+          <li><a href="/contact"><span class="glyphicon glyphicon-envelope"></span> 联系站长</a></li>
+      </ul>
+   </div>
+    <div>
+      <ul class="nav navbar-nav pull-right">
+         <li class="dropdown">
+             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                 {{ username }}
+                 <b class="caret"></b>
+             </a>
+             <ul class="dropdown-menu">
+                 <li><a href="/changepassword">修改密码</a></li>
+                 <li><a href="/logout">退出</a></li>
+             </ul>
+         </li>
+         <li><a>积分: {{ score }}</a></li>
+      </ul>
+   </div>
+</nav>
+
+
+<div id="container" class='container'>
+   <div class="mycenter">
+       <form action method="post" enctype="multipart/form-data" class="form form-horizontal" role="form">{% csrf_token %}
+           <div class="col-lg-11 text-center text-info">
+           <H2>发布求书任务</H2>
+           </div>
+          <div class="form-group">
+              <div class="input-group">
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-book"></i></span>
+                  <input type="text" class="form-control" placeholder="书名" name="name" />
+              </div>
+          </div>
+           <div class="form-group">
+              <div class="input-group">
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                  <input type="text" class="form-control" placeholder="作者" name="author" />
+              </div>
+          </div>
+           <div class="form-group">
+              <div class="input-group">
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-link"></i></span>
+                  <input type="text" class="form-control" placeholder="图片链接" name="imgurl" />
+              </div>
+          </div>
+           <div class="form-group">
+              <div class="input-group">
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-thumbs-up"></i></span>
+                  <select name='score' class="form-control">
+                        <option value="9">9</option>
+                        <option value="8">8</option>
+                        <option value="7">7</option>
+                        <option value="6">6</option>
+                        <option value="5">5</option>
+                        <option value="4">4</option>
+                        <option value="3">3</option>
+                        <option value="2">2</option>
+                        <option value="1">1</option>
+                  </select>
+              </div>
+          </div>
+           <div class="form-group">
+              <div class="input-group">
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-file"></i></span>
+                  <select name='format' class="form-control">
+                        <option value="ANY">任意</option>
+                        <option value="PDF">PDF</option>
+                        <option value="MOBI">MOBI</option>
+                        <option value="TXT">TXT</option>
+                        <option value="EPUB">EPUB</option>
+                  </select>
+              </div>
+          </div>
+           <div class="form-group">
+               <div class="input-group">
+                    <button type="submit" class="btn btn-default">发布</button>
+               </div>
+           </div>
+      </form>
+   </div>
+</div>
+
+{% endblock %}

@@ -295,6 +295,18 @@ def task(request):
     username = request.user.username
     nouwuser = User.objects.get(username=username)
     score = nouwuser.userprofile.score
+    tasks = TaskRecode.objects.all()
+    return render(request, 'task.html',
+                  {'tasks': tasks,
+                   'username': username,
+                   'score':score,
+                   'errors':None})
+
+@login_required
+def createtask(request):
+    username = request.user.username
+    nouwuser = User.objects.get(username=username)
+    score = nouwuser.userprofile.score
     if request.method == 'POST':
         tf = TaskForm(request.POST)
         logging.debug(tf)
@@ -319,14 +331,14 @@ def task(request):
                 format = tf.cleaned_data['format'],
             )
             taskrecord.save()
+            return HttpResponseRedirect('/task/')
     else:
         pass
-    tasks = TaskRecode.objects.all()
-    return render(request, 'task.html',
-                  {'tasks': tasks,
-                   'username': username,
+    return render(request, 'createtask.html',
+                  {'username': username,
                    'score':score,
                    'errors':None})
+
 
 @login_required
 def contact(request):
