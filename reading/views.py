@@ -360,31 +360,28 @@ def contact(request):
 
 
 def register(request):
-
+    errors = ''
     if request.method == "POST":
         uf = UserForm(request.POST)
         if uf.is_valid():
             username = uf.cleaned_data['username']
-            if len(username) < 4 or len(username) > 20:
-                return render(request, 'register.html', {"errors": "用户名长度应该在4-20个字符之间"})
             filterResult = User.objects.filter(username = username)
             if len(filterResult)>0:
-                return render(request, 'register.html', {"errors":"用户名已存在"})
+                errors = "用户名已存在！"
+                return render(request, 'register.html', {"errors":errors})
             else:
                 password1 = uf.cleaned_data['password1']
                 password2 = uf.cleaned_data['password2']
-                errors = []
-                if (password2 != password1):
-                    return render(request, 'register.html',{'errors':"两次输入的密码不一致!"})
                 email = uf.cleaned_data['email']
                 user = User.objects.create_user(username=username,password=password1, email=email)
                 return render(request, 'register_success.html')
         else:
-            return render(request, 'register.html', {"errors": "表单不正确"})
+            errors = "提交的信息不正确！"
+            return render(request, 'register.html', {"errors": errors})
 
     else:
         uf = UserForm()
-    return render(request, 'register.html')
+    return render(request, 'register.html', {"errors": errors})
 
 def userlogin(request):
     errors = ''
@@ -411,6 +408,7 @@ def userlogin(request):
 
 @login_required
 def changepassword(request):
+    errors = ''
     username = request.user.username
     nouwuser = User.objects.get(username=username)
     score = nouwuser.userprofile.score
@@ -424,7 +422,7 @@ def changepassword(request):
             user.save()
             return HttpResponseRedirect('/')
         else:
-            errors = 'password is wrong!'
+            errors = "原密码不正确！"
     else:
         pass
     return render(request, "changepassword.html", {'username': username, 'score':score, 'errors':errors})
