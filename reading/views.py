@@ -374,6 +374,8 @@ def register(request):
                 password2 = uf.cleaned_data['password2']
                 email = uf.cleaned_data['email']
                 user = User.objects.create_user(username=username,password=password1, email=email)
+                login(request, user)
+                request.session.set_expiry(12 * 3600)
                 return render(request, 'register_success.html')
         else:
             errors = "提交的信息不正确！"
