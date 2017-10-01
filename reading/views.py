@@ -25,7 +25,7 @@ def make_pages(cpage, allcount):
     :param allcount: 数据总数
     :return:
     '''
-    page_pernum = 20
+    page_pernum = 24
     page = cpage
     if allcount == 0:
         max_page = 0
