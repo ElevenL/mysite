@@ -364,9 +364,9 @@ def register(request):
     if request.method == "POST":
         uf = UserForm(request.POST)
         if uf.is_valid():
-            username = uf.cleaned_data['username']
+            username = uf.cleaned_data['username'].encode('utf-8')
             logging.debug(username)
-            filterResult = User.objects.filter(username = username.encode('utf-8'))
+            filterResult = User.objects.filter(username = username)
             logging.debug(filterResult)
             if len(filterResult) > 0:
                 errors = "用户名已存在！"
