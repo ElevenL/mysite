@@ -24,7 +24,7 @@ $(function(){
                           message: '用户名长度必须在4到20之间'
                     },
                     regexp: {//匹配规则
-                          regexp: /^[a-zA-Z0-9_\\u4e00-\\u9fa5]+$/,  //正则表达式
+                          regexp: /^[a-zA-Z0-9_\u4e00-\u9fa5]+$/,  //正则表达式
                           message:'用户名仅支持字母、数字、下划线的组合'
                     }
                 }
