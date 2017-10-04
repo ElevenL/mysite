@@ -367,7 +367,8 @@ def register(request):
             username = uf.cleaned_data['username']
             logging.debug(username)
             filterResult = User.objects.filter(username = username.encode('utf-8'))
-            if len(filterResult)>0:
+            logging.debug(filterResult)
+            if len(filterResult) > 0:
                 errors = "用户名已存在！"
                 return render(request, 'register.html', {"errors":errors})
             else:
