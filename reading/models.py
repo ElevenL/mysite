@@ -68,7 +68,7 @@ class TaskForm(forms.Form):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE) # 关联自带的User结构
-    score = models.IntegerField(default=1)
+    score = models.IntegerField(default=5)
     userType = models.IntegerField(default=0)
 
 @receiver(post_save, sender=User)
