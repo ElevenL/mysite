@@ -111,6 +111,8 @@ def search(request):
     username = request.user.username
     nouwuser = User.objects.get(username=username)
     score = nouwuser.userprofile.score
+    sr = SearchRecord(username=username, keyword=name_kw)
+    sr.save()
     return render(request, 'search.html',
                   {'books': books,
                    'username': username,

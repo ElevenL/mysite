@@ -45,6 +45,11 @@ class UploadRecord(models.Model):
     downtime = models.DateTimeField(default = timezone.now)
     filename = models.CharField(max_length=150, blank=True, default='')
 
+class SearchRecord(models.Model):
+    username = models.CharField(max_length=50)
+    keyword = models.CharField(max_length=150)
+    searchtime = models.DateTimeField(default = timezone.now)
+
 class TaskRecode(models.Model):
     askuser = models.CharField(max_length=50)
     bookname = models.CharField(max_length=150)
