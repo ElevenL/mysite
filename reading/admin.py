@@ -21,6 +21,10 @@ class UploadRecordAdmin(admin.ModelAdmin):
     list_display = ('bookname', 'author', 'downtime', 'username')
     search_fields = ('bookname', 'author', 'downtime', 'username')
 
+class SearchRecordAdmin(admin.ModelAdmin):
+    list_display = ('username', 'keyword', 'searchtime')
+    search_fields = ('username', 'keyword', 'searchtime')
+
 class TaskRecodeAdmin(admin.ModelAdmin):
     list_display = ('bookname', 'author', 'asktime')
     search_fields = ('bookname', 'author', 'asktime')
@@ -36,5 +40,6 @@ admin.site.register(BookInfo, BookInfoAdmin)
 admin.site.register(DownloadRecord, DownloadRecordAdmin)
 admin.site.register(UploadRecord, UploadRecordAdmin)
 admin.site.register(TaskRecode, TaskRecodeAdmin)
+admin.site.register(SearchRecord, SearchRecordAdmin)
 admin.site.unregister(User) # User是已经注册过的，所以首先需要解绑注册
 admin.site.register(User, UserAdmin)
