@@ -33,12 +33,19 @@
 </div>
 </nav>
 
+<div class='container'>
+<div class="alert alert-info">
+    <p>1、如果书库中没有您想要的书籍，可以在这里发布求书信息。</p>
+    <p>2、请录入书籍名称、作者、封面链接（非必填）、评分、文件格式，然后点击发布。</p>
+</div>
+</div>
+
 
 <div id="container" class='container'>
    <div class="mycenter">
        <form action method="post" enctype="multipart/form-data" class="form form-horizontal" role="form">{% csrf_token %}
            <div class="col-lg-11 text-center text-info">
-           <H2>发布求书任务</H2>
+           <H2>发布求书信息</H2>
            </div>
           <div class="form-group">
               <div class="input-group">

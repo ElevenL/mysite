@@ -174,7 +174,7 @@ def upload(request):
             username = request.user.username
             logging.debug(username)
             nouwuser = User.objects.get(username=username)
-            nouwuser.userprofile.score = nouwuser.userprofile.score + 1
+            nouwuser.userprofile.score = nouwuser.userprofile.score + 2
             bookinfo = BookInfo(
                 name = bif.cleaned_data['name'],
                 author = bif.cleaned_data['author'],
@@ -212,7 +212,7 @@ def uploadfile(request):
             username = request.user.username
             logging.debug(username)
             nouwuser = User.objects.get(username=username)
-            nouwuser.userprofile.score = nouwuser.userprofile.score + 1
+            nouwuser.userprofile.score = nouwuser.userprofile.score + 2
             bookName = urllib.unquote(str(request.get_full_path().split('/')[-1])).decode('utf-8')
             uploadfile = uff.cleaned_data['file']
             bookInfos = BookInfo.objects.filter(name=bookName)
@@ -398,7 +398,7 @@ def userlogin(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 if (user.last_login.date() != datetime.today().date()):
-                    user.userprofile.score = user.userprofile.score + 1
+                    user.userprofile.score = user.userprofile.score + 2
                     user.save()
                 login(request,user)
                 request.session.set_expiry(12 * 3600)
